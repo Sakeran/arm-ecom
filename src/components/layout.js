@@ -8,8 +8,16 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
+import { Normalize } from "styled-normalize"
+import { createGlobalStyle } from "styled-components"
 
 import Header from "./header"
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-size: 16px;
+  }
+`
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -33,6 +41,8 @@ const Layout = ({ children }) => (
             {data.site.siteMetadata.title}
           </footer>
         </div>
+        <Normalize />
+        <GlobalStyle />
       </>
     )}
   />
