@@ -12,6 +12,7 @@ import { Normalize } from "styled-normalize"
 import { createGlobalStyle } from "styled-components"
 
 import Header from "./header"
+import Footer from "./footer"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -35,11 +36,7 @@ const Layout = ({ children }) => (
         <Header siteTitle={data.site.siteMetadata.title} />
         <div>
           <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}
-            {` `}
-            {data.site.siteMetadata.title}
-          </footer>
+          <Footer title={data.site.siteMetadata.title} />
         </div>
         <Normalize />
         <GlobalStyle />
