@@ -2,6 +2,8 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
+import Nav from "./nav"
+
 const Header = ({ siteTitle }) => (
   <header>
     <div>
@@ -9,6 +11,7 @@ const Header = ({ siteTitle }) => (
         <Link to="/">{siteTitle}</Link>
       </h1>
     </div>
+    <Nav />
   </header>
 )
 

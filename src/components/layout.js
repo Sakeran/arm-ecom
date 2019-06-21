@@ -11,7 +11,7 @@ import { StaticQuery, graphql } from "gatsby"
 import { Normalize } from "styled-normalize"
 import { createGlobalStyle } from "styled-components"
 
-import Header from "./header"
+import Header from "./header/header"
 import Footer from "./footer"
 
 const GlobalStyle = createGlobalStyle`
