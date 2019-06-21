@@ -15,6 +15,7 @@ const SRSpan = styled.span`
 const MenuToggle = styled.a`
   display: inline-block;
   text-decoration: none;
+  margin-left: auto;
   color: #0f0b09;
 `
 
