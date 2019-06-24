@@ -11,11 +11,11 @@ import { StaticQuery, graphql } from "gatsby"
 import { Normalize } from "styled-normalize"
 import { createGlobalStyle } from "styled-components"
 
-import Header from "./header/header"
+import Header from "./header"
 import Footer from "./footer"
 
 const GlobalStyle = createGlobalStyle`
-  body {
+  :root {
     font-size: 16px;
   }
 `
@@ -34,12 +34,10 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div>
-          <main>{children}</main>
-          <Footer title={data.site.siteMetadata.title} />
-        </div>
-        <Normalize />
+        <main>{children}</main>
+        <Footer title={data.site.siteMetadata.title} />
         <GlobalStyle />
+        <Normalize />
       </>
     )}
   />
