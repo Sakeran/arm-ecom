@@ -11,7 +11,7 @@ const ColorBand = styled.div`
   h1 {
     margin: 0;
     margin-left: 0.5rem;
-    font-family: 'Righteous', sans-serif;
+    font-family: "Righteous", sans-serif;
     letter-spacing: 1px;
   }
 `
@@ -25,6 +25,13 @@ const ToggleButton = styled.button`
   right: 0.5rem;
   background: none;
   border: 0;
+  transition: fill 0.2s ease-in-out;
+  fill: white;
+
+  &:hover,
+  &:focus {
+    fill: black;
+  }
 
   svg {
     width: 3rem;
@@ -82,7 +89,7 @@ class Header extends React.Component {
           <ToggleButton
             onClick={this.toggleState}
             aria-expanded={this.state.menuToggled}
-            aria-label="Open Menu"
+            aria-label="Menu"
           >
             {this.state.menuToggled ? (
               <svg
