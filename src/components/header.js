@@ -52,7 +52,6 @@ const Menu = styled.div`
   overflow-y: auto;
   max-width: 75%;
   padding-top: 1rem;
-  padding-left: 1rem;
   transition: left 0.2s ease-in-out;
 
   &[aria-expanded="false"] {
@@ -60,17 +59,28 @@ const Menu = styled.div`
     box-shadow: 0.25rem 0 0.25rem 0 rgba(0, 0, 0, 0);
   }
 
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
+  a {
+    box-sizing: border-box;
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5rem 0 0.5rem 1rem;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+      color: white;
+      background-color: #5f4339;
+    }
+  }
   h4 {
     margin: 1rem 0;
+    padding-left: 1rem;
   }
 `
 
