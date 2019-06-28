@@ -17,6 +17,7 @@ import Footer from "./footer"
 const GlobalStyle = createGlobalStyle`
   :root {
     font-size: 16px;
+    font-family: 'Roboto', 'helvetica', 'arial', sans-serif;
   }
 `
 

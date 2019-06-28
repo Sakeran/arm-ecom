@@ -3,10 +3,16 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 
 const ColorBand = styled.div`
-  background-color: red;
-
+  background-color: #5f4339;
+  color: white;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
   h1 {
     margin: 0;
+    margin-left: 0.5rem;
+    font-family: 'Righteous', sans-serif;
+    letter-spacing: 1px;
   }
 `
 
