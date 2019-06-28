@@ -77,7 +77,24 @@ class Header extends React.Component {
     menuToggled: false,
   }
 
-  toggleState = () => this.setState({ menuToggled: !this.state.menuToggled })
+  // Toggle the menu off if a click happens somewhere else
+  // on the screen.
+  backdropListener = e => {
+    const nav = document.querySelector('#nav-menu');
+    if (!nav.contains(e.target)) {
+      this.toggleState()
+    }
+  }
+
+  toggleState = () => {
+    const menuToggled = !this.state.menuToggled
+    this.setState({ menuToggled })
+    if (menuToggled) {
+      document.addEventListener("click", this.backdropListener)
+    } else {
+      document.removeEventListener("click", this.backdropListener)
+    }
+  }
 
   render() {
     return (
@@ -113,7 +130,7 @@ class Header extends React.Component {
               </svg>
             )}
           </ToggleButton>
-          <Menu aria-expanded={this.state.menuToggled}>
+          <Menu id="nav-menu" aria-expanded={this.state.menuToggled}>
             <ul>
               <li>
                 <Link to="/">Home</Link>
