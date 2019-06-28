@@ -247,7 +247,7 @@ class Header extends React.Component {
   toggleState = () => {
     const menuHidden = !this.state.menuHidden
     this.setState({ menuHidden })
-    if (menuHidden) {
+    if (!menuHidden) {
       document.addEventListener("click", this.backdropListener)
     } else {
       document.removeEventListener("click", this.backdropListener)
