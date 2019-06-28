@@ -125,7 +125,6 @@ const Menu = styled.div`
 const NoscriptMenu = styled(Menu)`
   position: relative;
   padding-bottom: 1rem;
-  height: auto;
   width: 100%;
   max-width: initial;
   box-shadow: none;
@@ -162,17 +161,78 @@ const MenuLinks = () => (
   </>
 )
 
+// "Main" version of the navigation menu.
+// Has two forms - slide-out and desktop (normal)
+const MountedNav = props => {
+  // Note that we only care about ARIA if the menu
+  // is in slide-out form.
+  const ariaProps = !props.menuSlideOut
+    ? {} // No ARIA needed
+    : {
+        // use ARIA
+        "aria-expanded": !props.menuHidden,
+        // This bit includes the aria-hidden prop only if it is true.
+        ...(!props.menuHidden ? {} : { "aria-hidden": true }),
+      }
+
+  return (
+    <nav>
+      <ToggleButton
+        onClick={props.onToggle}
+        aria-expanded={!props.menuHidden}
+        aria-label="Menu"
+      >
+        {!props.menuHidden ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            <path d="M0 0h24v24H0z" fill="none" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        )}
+      </ToggleButton>
+      <Menu
+        id="nav-menu"
+        {...ariaProps}
+      >
+        <MenuLinks />
+      </Menu>
+    </nav>
+  )
+}
+
 class Header extends React.Component {
   state = {
-    menuToggled: false,
+    mounted: false,
+    menuHidden: true,
+    menuSlideOut: true,
   }
 
   componentDidMount() {
-    // We're querying the document width in 'render', so this is
-    // needed to make the nav accessible in all scenarios.
-    window.addEventListener("resize", () => {
-      this.forceUpdate()
-    })
+    const checkWidth = () => {
+      const width = document.body.clientWidth
+      if (width >= 768) {
+        this.setState({ menuSlideOut: false })
+      } else {
+        this.setState({ menuSlideOut: true })
+      }
+    }
+    window.addEventListener("resize", () => checkWidth())
+    checkWidth()
+    this.setState({ mounted: true })
   }
 
   // Toggle the menu off if a click happens somewhere else
@@ -185,9 +245,9 @@ class Header extends React.Component {
   }
 
   toggleState = () => {
-    const menuToggled = !this.state.menuToggled
-    this.setState({ menuToggled })
-    if (menuToggled) {
+    const menuHidden = !this.state.menuHidden
+    this.setState({ menuHidden })
+    if (menuHidden) {
       document.addEventListener("click", this.backdropListener)
     } else {
       document.removeEventListener("click", this.backdropListener)
@@ -195,59 +255,24 @@ class Header extends React.Component {
   }
 
   render() {
-    const menuIsVisbile =
-      document.body.clientWidth >= 768 || this.state.menuToggled
-
-    const menuARIA = {
-      "aria-expanded": menuIsVisbile,
-    }
-    if (!menuIsVisbile) {
-      menuARIA["aria-hidden"] = true
-    }
-
     return (
       <header>
         <ColorBand>
           <h1>{this.props.siteTitle}</h1>
         </ColorBand>
-        <nav>
-          <ToggleButton
-            onClick={this.toggleState}
-            aria-expanded={menuIsVisbile}
-            aria-label="Menu"
-          >
-            {menuIsVisbile ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                <path d="M0 0h24v24H0z" fill="none" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-              </svg>
-            )}
-          </ToggleButton>
-          <Menu id="nav-menu" {...menuARIA}>
-            <MenuLinks />
-          </Menu>
-        </nav>
+        {/* Show the main nav only after mount. */}
+        {this.state.mounted && (
+          <MountedNav 
+            onToggle={this.toggleState}
+            {...this.state}
+          />
+        )}
         <noscript>
-          <NoscriptMenu>
-            <nav>
+          <nav>
+            <NoscriptMenu>
               <MenuLinks />
-            </nav>
-          </NoscriptMenu>
+            </NoscriptMenu>
+          </nav>
         </noscript>
       </header>
     )
