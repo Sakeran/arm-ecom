@@ -84,6 +84,46 @@ const Menu = styled.div`
   }
 `
 
+const NoscriptMenu = styled(Menu)`
+  position: relative;
+  padding-bottom: 1rem;
+  height: auto;
+  width: 100%;
+  max-width: initial;
+  box-shadow: none;
+`
+
+const MenuLinks = () => (
+  <>
+    <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/">Login</Link>
+      </li>
+      <li>
+        <Link to="/">Cart</Link>
+      </li>
+    </ul>
+    <h4>Shop By Category</h4>
+    <ul>
+      <li>
+        <Link to="/">Phones</Link>
+      </li>
+      <li>
+        <Link to="/">Watches</Link>
+      </li>
+      <li>
+        <Link to="/">Laptops</Link>
+      </li>
+      <li>
+        <Link to="/">Cameras</Link>
+      </li>
+    </ul>
+  </>
+)
+
 class Header extends React.Component {
   state = {
     menuToggled: false,
@@ -147,34 +187,16 @@ class Header extends React.Component {
             aria-expanded={this.state.menuToggled}
             aria-hidden={!this.state.menuToggled}
           >
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/">Login</Link>
-              </li>
-              <li>
-                <Link to="/">Cart</Link>
-              </li>
-            </ul>
-            <h4>Shop By Category</h4>
-            <ul>
-              <li>
-                <Link to="/">Phones</Link>
-              </li>
-              <li>
-                <Link to="/">Watches</Link>
-              </li>
-              <li>
-                <Link to="/">Laptops</Link>
-              </li>
-              <li>
-                <Link to="/">Cameras</Link>
-              </li>
-            </ul>
+            <MenuLinks />
           </Menu>
         </nav>
+        <noscript>
+          <NoscriptMenu>
+            <nav>
+              <MenuLinks />
+            </nav>
+          </NoscriptMenu>
+        </noscript>
       </header>
     )
   }
