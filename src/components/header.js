@@ -41,8 +41,9 @@ const ToggleButton = styled.button`
 
 const Menu = styled.div`
   box-sizing: border-box;
-  background-color: purple;
+  background-color: #be9c91;
   position: absolute;
+  box-shadow: 0.25rem 0 0.25rem 0 rgba(0, 0, 0, 0.3);
   top: 0;
   left: 0;
   width: 300px;
@@ -56,6 +57,7 @@ const Menu = styled.div`
 
   &[aria-expanded="false"] {
     left: -300px;
+    box-shadow: 0.25rem 0 0.25rem 0 rgba(0, 0, 0, 0);
   }
 
   a {
@@ -80,7 +82,7 @@ class Header extends React.Component {
   // Toggle the menu off if a click happens somewhere else
   // on the screen.
   backdropListener = e => {
-    const nav = document.querySelector('#nav-menu');
+    const nav = document.querySelector("#nav-menu")
     if (!nav.contains(e.target)) {
       this.toggleState()
     }
@@ -130,7 +132,11 @@ class Header extends React.Component {
               </svg>
             )}
           </ToggleButton>
-          <Menu id="nav-menu" aria-expanded={this.state.menuToggled}>
+          <Menu
+            id="nav-menu"
+            aria-expanded={this.state.menuToggled}
+            aria-hidden={!this.state.menuToggled}
+          >
             <ul>
               <li>
                 <Link to="/">Home</Link>
