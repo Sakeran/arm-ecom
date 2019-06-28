@@ -37,6 +37,10 @@ const ToggleButton = styled.button`
     width: 3rem;
     height: auto;
   }
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `
 
 const Menu = styled.div`
@@ -81,6 +85,40 @@ const Menu = styled.div`
   h4 {
     margin: 1rem 0;
     padding-left: 1rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    position: relative;
+    max-width: initial;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: none;
+
+    &[aria-expanded="false"] {
+      /* Unset slide-in behavior */
+      left: 0;
+      box-shadow: none;
+    }
+
+    ul {
+      display: flex;
+      margin-left: 1rem;
+      li {
+        margin-right: 1rem;
+        flex: 1;
+        a {
+          width: auto;
+          padding: 0.5rem;
+        }
+      }
+    }
+
+    h4 {
+      margin-left: auto;
+    }
   }
 `
 
@@ -129,6 +167,14 @@ class Header extends React.Component {
     menuToggled: false,
   }
 
+  componentDidMount() {
+    // We're querying the document width in 'render', so this is
+    // needed to make the nav accessible in all scenarios.
+    window.addEventListener("resize", () => {
+      this.forceUpdate()
+    })
+  }
+
   // Toggle the menu off if a click happens somewhere else
   // on the screen.
   backdropListener = e => {
@@ -149,6 +195,16 @@ class Header extends React.Component {
   }
 
   render() {
+    const menuIsVisbile =
+      document.body.clientWidth >= 768 || this.state.menuToggled
+
+    const menuARIA = {
+      "aria-expanded": menuIsVisbile,
+    }
+    if (!menuIsVisbile) {
+      menuARIA["aria-hidden"] = true
+    }
+
     return (
       <header>
         <ColorBand>
@@ -157,10 +213,10 @@ class Header extends React.Component {
         <nav>
           <ToggleButton
             onClick={this.toggleState}
-            aria-expanded={this.state.menuToggled}
+            aria-expanded={menuIsVisbile}
             aria-label="Menu"
           >
-            {this.state.menuToggled ? (
+            {menuIsVisbile ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -182,11 +238,7 @@ class Header extends React.Component {
               </svg>
             )}
           </ToggleButton>
-          <Menu
-            id="nav-menu"
-            aria-expanded={this.state.menuToggled}
-            aria-hidden={!this.state.menuToggled}
-          >
+          <Menu id="nav-menu" {...menuARIA}>
             <MenuLinks />
           </Menu>
         </nav>
