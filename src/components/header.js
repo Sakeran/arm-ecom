@@ -44,6 +44,7 @@ const ToggleButton = styled.button`
 `
 
 const Menu = styled.div`
+  z-index: 1000;
   box-sizing: border-box;
   background-color: #be9c91;
   position: absolute;
