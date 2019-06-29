@@ -205,10 +205,7 @@ const MountedNav = props => {
           </svg>
         )}
       </ToggleButton>
-      <Menu
-        id="nav-menu"
-        {...ariaProps}
-      >
+      <Menu id="nav-menu" {...ariaProps}>
         <MenuLinks />
       </Menu>
     </nav>
@@ -263,10 +260,7 @@ class Header extends React.Component {
         </ColorBand>
         {/* Show the main nav only after mount. */}
         {this.state.mounted && (
-          <MountedNav 
-            onToggle={this.toggleState}
-            {...this.state}
-          />
+          <MountedNav onToggle={this.toggleState} {...this.state} />
         )}
         <noscript>
           <nav>
