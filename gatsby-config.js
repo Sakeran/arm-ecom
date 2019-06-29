@@ -31,5 +31,55 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+
+    // Fake Item Data
+    // Phones
+    {
+      resolve: `gatsby-source-faker`,
+      options: {
+        schema: {
+          company: ["companyName"],
+          commerce: ["productName"],
+        },
+        count: 20,
+        type: "ProductDataPhones",
+      },
+    },
+    // Laptops
+    {
+      resolve: `gatsby-source-faker`,
+      options: {
+        schema: {
+          company: ["companyName"],
+          commerce: ["productName"],
+        },
+        count: 20,
+        type: "ProductDataLaptops",
+      },
+    },
+    // Cameras
+    {
+      resolve: `gatsby-source-faker`,
+      options: {
+        schema: {
+          company: ["companyName"],
+          commerce: ["productName"],
+        },
+        count: 20,
+        type: "ProductDataCameras",
+      },
+    },
+    // Watches
+    {
+      resolve: `gatsby-source-faker`,
+      options: {
+        schema: {
+          company: ["companyName"],
+          commerce: ["productName"],
+        },
+        count: 20,
+        type: "ProductDataWatches",
+      },
+    },
   ],
 }
