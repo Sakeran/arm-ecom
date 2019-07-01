@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { connect } from "react-redux"
 import styled from "styled-components"
 
 const ColorBand = styled.div`
@@ -143,14 +144,18 @@ const NoscriptMenu = styled(Menu)`
   box-shadow: none;
 `
 
-const MenuLinks = () => (
+const MenuLinks = ({ loggedIn }) => (
   <>
     <ul>
       <li>
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/">Login</Link>
+        {loggedIn ? (
+          <Link to="/logout">Logout</Link>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </li>
       <li>
         <Link to="/">Cart</Link>
@@ -222,7 +227,7 @@ const MountedNav = props => {
         )}
       </ToggleButton>
       <Menu id="nav-menu" {...ariaProps}>
-        <MenuLinks />
+        <MenuLinks loggedIn={props.loggedIn} />
       </Menu>
     </NavColorBand>
   )
@@ -276,7 +281,11 @@ class Header extends React.Component {
         </ColorBand>
         {/* Show the main nav only after mount. */}
         {this.state.mounted && (
-          <MountedNav onToggle={this.toggleState} {...this.state} />
+          <MountedNav
+            onToggle={this.toggleState}
+            {...this.state}
+            loggedIn={this.props.loggedIn}
+          />
         )}
         <noscript>
           <nav>
@@ -290,4 +299,6 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+export default connect(state => ({
+  loggedIn: state.loggedIn,
+}))(Header)
