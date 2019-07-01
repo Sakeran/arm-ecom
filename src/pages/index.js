@@ -12,12 +12,15 @@ const StyledSplashPromo = styled.section`
   position: relative;
   overflow: hidden;
 
+  background-color: lightgray;
+
   h2 {
     position: absolute;
     left: -10000px;
     top: 0;
     width: 1px;
     height: 1px;
+    border: 0;
     margin: 0;
     overflow: hidden;
   }
@@ -31,6 +34,14 @@ const StyledSplashPromo = styled.section`
     line-height: 4rem;
     mark {
       background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    @media screen and (min-width: 768px) {
+      bottom: unset;
+      font-size: 3.5rem;
+      line-height: 4.5rem;
+      top: 4rem;
+      right: 4rem;
     }
   }
 `
