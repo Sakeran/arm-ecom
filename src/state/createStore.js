@@ -4,7 +4,11 @@ const resolver = (state, action) => {
   return state
 }
 
-const initialState = {}
+const initialState = {
+  loggedIn: false,
+  username: null,
+  cart: null,
+}
 
 const createStore = () => reduxCreateStore(resolver, initialState)
 
