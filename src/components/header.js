@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 import { connect } from "react-redux"
 import styled from "styled-components"
 
+import { logout } from "../state/actions"
+
 const ColorBand = styled.div`
   background-color: #5f4339;
   color: white;
@@ -150,14 +152,18 @@ const NoscriptMenu = styled(Menu)`
   box-shadow: none;
 `
 
-const MenuLinks = ({ loggedIn }) => (
+const MenuLinks = ({ loggedIn, logoutDispatch }) => (
   <>
     <ul>
       <li>
         <Link to="/">Home</Link>
       </li>
       <li>
-        {loggedIn ? <button>Logout</button> : <Link to="/login">Login</Link>}
+        {loggedIn ? (
+          <button onClick={logoutDispatch}>Logout</button>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </li>
       <li>
         <Link to="/">Cart</Link>
@@ -229,7 +235,7 @@ const MountedNav = props => {
         )}
       </ToggleButton>
       <Menu id="nav-menu" {...ariaProps}>
-        <MenuLinks loggedIn={props.loggedIn} />
+        <MenuLinks loggedIn={props.loggedIn} logoutDispatch={props.logoutDispatch} />
       </Menu>
     </NavColorBand>
   )
@@ -287,6 +293,7 @@ class Header extends React.Component {
             onToggle={this.toggleState}
             {...this.state}
             loggedIn={this.props.loggedIn}
+            logoutDispatch={this.props.logout}
           />
         )}
         <noscript>
@@ -301,6 +308,15 @@ class Header extends React.Component {
   }
 }
 
-export default connect(state => ({
+const mapStateToProps = state => ({
   loggedIn: state.loggedIn,
-}))(Header)
+})
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout()),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header)
