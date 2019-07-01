@@ -18,12 +18,14 @@ const GlobalStyle = createGlobalStyle`
   :root {
     font-size: 16px;
     font-family: 'Roboto', 'helvetica', 'arial', sans-serif;
+    background-color: #ededed;
   }
 `
 
 const Main = styled.main`
   max-width: 1200px;
   margin: 0 auto;
+  background-color: white;
 `
 
 const Layout = ({ children }) => (
