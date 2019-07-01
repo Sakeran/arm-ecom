@@ -6,17 +6,20 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+import { login } from "../state/actions"
+
 // Login Form (Displays if not logged in)
 
-const loginFunction = e => {
+const loginFunction = loginDispatch => e => {
   e.preventDefault()
   const username = document.querySelector("#username").value
   if (!username) return
+  loginDispatch(username)
   navigate("/")
 }
 
-const LoginForm = () => (
-  <form onSubmit={loginFunction}>
+const LoginForm = ({ loginDispatch }) => (
+  <form onSubmit={loginFunction(loginDispatch)}>
     <label htmlFor="username">Username</label>
     <input
       id="username"
@@ -45,17 +48,21 @@ const LoggedInPage = ({ username }) => (
     <Link to="/">Return to main page.</Link>
   </>
 )
-const LoggedOutPage = () => (
+const LoggedOutPage = ({ loginDispatch }) => (
   <>
     <h2>Login</h2>
-    <LoginForm />
+    <LoginForm loginDispatch={loginDispatch} />
   </>
 )
 
-const LoginPage = ({ loggedIn, username }) => (
+const LoginPage = ({ loggedIn, username, login }) => (
   <Layout>
     <SEO title="Login" />
-    {loggedIn ? <LoggedInPage username={username} /> : <LoggedOutPage />}
+    {loggedIn ? (
+      <LoggedInPage username={username} />
+    ) : (
+      <LoggedOutPage loginDispatch={login} />
+    )}
   </Layout>
 )
 
@@ -64,4 +71,11 @@ const mapStateToProps = state => ({
   username: state.username,
 })
 
-export default connect(mapStateToProps)(LoginPage)
+const mapDispatchToProps = dispatch => ({
+  login: username => dispatch(login(username)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginPage)
