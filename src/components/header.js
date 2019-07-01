@@ -75,13 +75,18 @@ const Menu = styled.div`
     margin: 0;
     padding: 0;
   }
-  a {
+  a,
+  button {
     box-sizing: border-box;
     display: inline-block;
     text-decoration: none;
     color: inherit;
     padding: 0.5rem 0 0.5rem 1rem;
     width: 100%;
+    background: none;
+    text-align: left;
+    border: none;
+    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -117,7 +122,8 @@ const Menu = styled.div`
       li {
         margin-right: 1rem;
         flex: 1;
-        a {
+        a,
+        button {
           width: auto;
           padding: 0.5rem;
         }
@@ -151,11 +157,7 @@ const MenuLinks = ({ loggedIn }) => (
         <Link to="/">Home</Link>
       </li>
       <li>
-        {loggedIn ? (
-          <Link to="/logout">Logout</Link>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
+        {loggedIn ? <button>Logout</button> : <Link to="/login">Login</Link>}
       </li>
       <li>
         <Link to="/">Cart</Link>
