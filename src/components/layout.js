@@ -28,6 +28,26 @@ const Main = styled.main`
   background-color: white;
 `
 
+const SkipLinks = styled.a`
+  display: block;
+  width: 100%;
+  background: #262626;
+  text-decoration: none;
+  color: white;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 5rem;
+  z-index: 1;
+  top: -4rem;
+  transition: top 0.3s ease-in;
+
+  &:focus {
+    top: 0;
+  }
+`
+
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
@@ -41,8 +61,9 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
+        <SkipLinks href="#main">Skip to main content</SkipLinks>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <Main>{children}</Main>
+        <Main id="main">{children}</Main>
         <Footer title={data.site.siteMetadata.title} />
         <GlobalStyle />
         <Normalize />
