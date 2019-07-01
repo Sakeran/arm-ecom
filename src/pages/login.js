@@ -8,6 +8,16 @@ import SEO from "../components/seo"
 
 import { login } from "../state/actions"
 
+// Styles
+
+const StyledForm = styled.form`
+  width: min-content;
+  margin: 0 auto;
+  border: 1px solid #bebebe;
+  padding: 2rem;
+  border-radius: 0.5rem;
+`
+
 // Login Form (Displays if not logged in)
 
 const loginFunction = loginDispatch => e => {
@@ -19,7 +29,7 @@ const loginFunction = loginDispatch => e => {
 }
 
 const LoginForm = ({ loginDispatch }) => (
-  <form onSubmit={loginFunction(loginDispatch)}>
+  <StyledForm onSubmit={loginFunction(loginDispatch)}>
     <label htmlFor="username">Username</label>
     <input
       id="username"
@@ -28,7 +38,7 @@ const LoginForm = ({ loginDispatch }) => (
       placeholder="User Name"
       required
     />
-    <label htmlFor="password">Password (disabled for demo)</label>
+    <label htmlFor="password">Password</label>
     <input
       id="password"
       name="password"
@@ -37,7 +47,7 @@ const LoginForm = ({ loginDispatch }) => (
       disabled
     />
     <input type="submit" value="Log In" />
-  </form>
+  </StyledForm>
 )
 
 // Show one of two pages, depending on whether the user is logged in.
