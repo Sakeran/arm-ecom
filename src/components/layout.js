@@ -20,6 +20,31 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', 'helvetica', 'arial', sans-serif;
     background-color: #ededed;
   }
+
+  /* Form Elements */
+  
+  label {
+    display: block;
+    margin-bottom: 0.25rem;
+
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    box-sizing: border-box;
+    display: block;
+    border: 1px solid #bebebe;
+    margin-right: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  input[type="submit"] {
+    background: #5c6bc0;
+	  box-shadow: none;
+    border: none;
+    padding: 0.5rem;
+    display: block;
+  }
 `
 
 const Main = styled.main`
