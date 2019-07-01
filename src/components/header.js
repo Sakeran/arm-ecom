@@ -13,6 +13,11 @@ const ColorBand = styled.div`
     margin-left: 0.5rem;
     font-family: "Righteous", sans-serif;
     letter-spacing: 1px;
+    @media screen and (min-width: 1200px) {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
   }
 `
 
@@ -97,6 +102,7 @@ const Menu = styled.div`
     align-items: center;
     padding: 0;
     transition: none;
+    box-shadow: none;
 
     &[aria-expanded="false"] {
       /* Unset slide-in behavior */
@@ -120,6 +126,12 @@ const Menu = styled.div`
     h4 {
       margin-left: auto;
     }
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 `
 
@@ -162,6 +174,10 @@ const MenuLinks = () => (
   </>
 )
 
+const NavColorBand = styled.nav`
+  background-color: #be9c91;
+`
+
 // "Main" version of the navigation menu.
 // Has two forms - slide-out and desktop (normal)
 const MountedNav = props => {
@@ -177,7 +193,7 @@ const MountedNav = props => {
       }
 
   return (
-    <nav>
+    <NavColorBand>
       <ToggleButton
         onClick={props.onToggle}
         aria-expanded={!props.menuHidden}
@@ -208,7 +224,7 @@ const MountedNav = props => {
       <Menu id="nav-menu" {...ariaProps}>
         <MenuLinks />
       </Menu>
-    </nav>
+    </NavColorBand>
   )
 }
 
