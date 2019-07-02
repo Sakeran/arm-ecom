@@ -37,14 +37,23 @@ const CardInfo = styled.div`
   }
 `
 
-export default ({ productName = "Product Name", price = "$399"}) => (
+export default ({ product: { fields } }) => (
   <StyledProductCardWide>
-    <StyledImage type="phone" imageId={2} />
+    <StyledImage
+      type={fields.type}
+      imageId={fields.imageID}
+      alt={fields.productName}
+    />
     <TextContent>
-      <h3>Product Name</h3>
+      <h3>{fields.productName}</h3>
       <CardInfo>
-        <PriceTag>$399</PriceTag>
-        <InternalLink to="/">View Product</InternalLink>
+        <PriceTag>{`$${fields.price}`}</PriceTag>
+        <InternalLink
+          to="/"
+          ariaLabel={`View product information for ${fields.productName}`}
+        >
+          View Product
+        </InternalLink>
       </CardInfo>
     </TextContent>
   </StyledProductCardWide>
