@@ -5,6 +5,7 @@ import styled from "styled-components"
 
 import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
+import ProductCardWide from '../components/productCardWide'
 
 // Splash Image / Promotional Message
 
@@ -61,7 +62,13 @@ const SplashPromo = ({ fluid }) => (
 
 const StyledRecommended = styled.section``
 
-const Recommended = () => <StyledRecommended />
+const Recommended = () => (
+  <StyledRecommended>
+    <h2>Recommended In Watches</h2>
+    <ProductCardWide />
+    <ProductCardWide />
+  </StyledRecommended>
+)
 
 // "Deal of the Day" section
 
