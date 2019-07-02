@@ -21,6 +21,10 @@ const GlobalStyle = createGlobalStyle`
     background-color: #ededed;
   }
 
+  body {
+    min-height: 100vh;
+  }
+
   /* Form Elements */
   
   label {
@@ -48,9 +52,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const Main = styled.main`
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   background-color: white;
+  flex: auto;
 `
 
 const SkipLinks = styled.a`
@@ -73,6 +79,12 @@ const SkipLinks = styled.a`
   }
 `
 
+const FlexLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`
+
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
@@ -87,9 +99,11 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <SkipLinks href="#main">Skip to main content</SkipLinks>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <Main id="main">{children}</Main>
-        <Footer title={data.site.siteMetadata.title} />
+        <FlexLayout>
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <Main id="main">{children}</Main>
+          <Footer title={data.site.siteMetadata.title} />
+        </FlexLayout>
         <GlobalStyle />
         <Normalize />
       </>
