@@ -301,6 +301,8 @@ class Header extends React.Component {
             logoutDispatch={this.props.logout}
           />
         )}
+        {/* Note - since this is just a static exercise project, we don't have
+            the SSR required to make the noscript menu functional without JS. */}
         <noscript>
           <nav>
             <NoscriptMenu>
