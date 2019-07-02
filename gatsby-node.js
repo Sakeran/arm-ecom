@@ -25,7 +25,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     actions.createNodeField({
       node,
       name: "imageID",
-      value:  1 + Math.floor(Math.random() * 5),
+      value: 1 + Math.floor(Math.random() * 5),
+    })
+
+    // Product type (used to select the right image)
+    actions.createNodeField({
+      node,
+      name: "type",
+      value: determineType(node.internal.type),
     })
 
     // Product Name
@@ -72,5 +79,21 @@ function determinePrice(nodeType) {
       return minMaxBy50s(50, 200) - 1
     default:
       return 1
+  }
+}
+
+// Determine the type of the product, based on the nodeType
+function determineType(nodeType) {
+  switch (nodeType) {
+    case "ProductDataLaptops":
+      return "laptop"
+    case "ProductDataPhones":
+      return "phone"
+    case "ProductDataCameras":
+      return "camera"
+    case "ProductDataWatches":
+      return "watch"
+    default:
+      return ""
   }
 }
