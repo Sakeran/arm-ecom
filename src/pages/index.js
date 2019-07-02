@@ -62,11 +62,12 @@ const SplashPromo = ({ fluid }) => (
 
 const StyledRecommended = styled.section``
 
-const Recommended = () => (
+const Recommended = ({ items }) => (
   <StyledRecommended>
     <h2>Recommended In Watches</h2>
-    <ProductCardWide />
-    <ProductCardWide />
+    {items.map((item, idx) => (
+      <ProductCardWide key={idx} product={item} />
+    ))}
   </StyledRecommended>
 )
 
@@ -84,7 +85,7 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <SplashPromo fluid={data.splashBG.childImageSharp.fluid} />
-    <Recommended />
+    <Recommended items={data.watches.nodes} />
     <DealOfTheDay />
     {/* TODO - 'Shop' sections/sliders */}
   </Layout>
@@ -96,6 +97,16 @@ export const query = graphql`
       childImageSharp {
         fluid {
           ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    watches: allProductDataWatches(limit: 2) {
+      nodes {
+        fields {
+          imageID
+          price
+          productName
+          rating
         }
       }
     }
