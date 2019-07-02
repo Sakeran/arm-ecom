@@ -13,7 +13,9 @@ const StyledProductCardWide = styled.div`
 `
 
 const StyledImage = styled(ProductImage)`
+  box-sizing: border-box;
   width: 40%;
+  border: 1px solid black;
 `
 
 const TextContent = styled.div`
