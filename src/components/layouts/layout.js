@@ -1,8 +1,5 @@
 /**
- * Layout component that queries for data
- * with Gatsby's StaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/static-query/
+ * Main Layout Component.
  */
 
 import React from "react"
@@ -11,8 +8,8 @@ import { StaticQuery, graphql } from "gatsby"
 import { Normalize } from "styled-normalize"
 import styled, { createGlobalStyle } from "styled-components"
 
-import Header from "./header"
-import Footer from "./footer"
+import Header from "../header"
+import Footer from "../footer"
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -48,6 +45,10 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     padding: 0.5rem;
     display: block;
+    transition: color 0.2s ease-in-out;
+    &:hover, &:focus {
+      color: white;
+    }
   }
 `
 

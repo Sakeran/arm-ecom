@@ -3,7 +3,7 @@ import { Link, navigate } from "gatsby"
 import { connect } from "react-redux"
 import styled from "styled-components"
 
-import Layout from "../components/layout"
+import CenteredMainLayout from '../components/layouts/centeredMainLayout'
 import SEO from "../components/seo"
 
 import { login } from "../state/actions"
@@ -16,6 +16,9 @@ const StyledForm = styled.form`
   border: 1px solid #bebebe;
   padding: 2rem;
   border-radius: 0.5rem;
+  h2 {
+    margin: 0 0 1rem 0;
+  }
 `
 
 // Login Form (Displays if not logged in)
@@ -30,6 +33,7 @@ const loginFunction = loginDispatch => e => {
 
 const LoginForm = ({ loginDispatch }) => (
   <StyledForm onSubmit={loginFunction(loginDispatch)}>
+    <h2>Log In</h2>
     <label htmlFor="username">Username</label>
     <input
       id="username"
@@ -58,22 +62,20 @@ const LoggedInPage = ({ username }) => (
     <Link to="/">Return to main page.</Link>
   </>
 )
+
 const LoggedOutPage = ({ loginDispatch }) => (
-  <>
-    <h2>Login</h2>
-    <LoginForm loginDispatch={loginDispatch} />
-  </>
+  <LoginForm loginDispatch={loginDispatch} />
 )
 
 const LoginPage = ({ loggedIn, username, login }) => (
-  <Layout>
+  <CenteredMainLayout>
     <SEO title="Login" />
-    {loggedIn ? (
-      <LoggedInPage username={username} />
-    ) : (
-      <LoggedOutPage loginDispatch={login} />
-    )}
-  </Layout>
+      {loggedIn ? (
+        <LoggedInPage username={username} />
+      ) : (
+        <LoggedOutPage loginDispatch={login} />
+      )}
+  </CenteredMainLayout>
 )
 
 const mapStateToProps = state => ({
