@@ -165,9 +165,11 @@ const MenuLinks = ({ loggedIn, logoutDispatch }) => (
           <Link to="/login">Login</Link>
         )}
       </li>
-      <li>
-        <Link to="/">Cart</Link>
-      </li>
+      {loggedIn && (
+        <li>
+          <Link to="/">Cart</Link>
+        </li>
+      )}
     </ul>
     <h4>Shop By Category</h4>
     <ul>
@@ -235,7 +237,10 @@ const MountedNav = props => {
         )}
       </ToggleButton>
       <Menu id="nav-menu" {...ariaProps}>
-        <MenuLinks loggedIn={props.loggedIn} logoutDispatch={props.logoutDispatch} />
+        <MenuLinks
+          loggedIn={props.loggedIn}
+          logoutDispatch={props.logoutDispatch}
+        />
       </Menu>
     </NavColorBand>
   )
