@@ -12,6 +12,10 @@ const StyledProductCardWide = styled.div`
   display: flex;
 `
 
+const StyledImage = styled(ProductImage)`
+  width: 40%;
+`
+
 const TextContent = styled.div`
   flex: auto;
   margin-left: 1rem;
@@ -33,9 +37,9 @@ const CardInfo = styled.div`
   }
 `
 
-export default () => (
+export default ({ productName = "Product Name", price = "$399"}) => (
   <StyledProductCardWide>
-    <ProductImage />
+    <StyledImage type="phone" imageId={2} />
     <TextContent>
       <h3>Product Name</h3>
       <CardInfo>

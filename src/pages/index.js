@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
-import ProductCardWide from '../components/productCardWide'
+import ProductCardWide from "../components/productCardWide"
 
 // Splash Image / Promotional Message
 
