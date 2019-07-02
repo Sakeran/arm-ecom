@@ -99,6 +99,7 @@ const Menu = styled.div`
   h4 {
     margin: 1rem 0;
     padding-left: 1rem;
+    text-align: unset;
   }
 
   @media screen and (min-width: 768px) {
