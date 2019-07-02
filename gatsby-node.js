@@ -21,11 +21,11 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       value: 1 + Math.floor(Math.random() * 10),
     })
 
-    // Image (0-4)
+    // Image (1-5) - We'll have five sample images per product category
     actions.createNodeField({
       node,
       name: "imageID",
-      value: Math.floor(Math.random() * 5),
+      value:  1 + Math.floor(Math.random() * 5),
     })
 
     // Product Name
