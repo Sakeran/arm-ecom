@@ -60,7 +60,12 @@ const SplashPromo = ({ fluid }) => (
 
 // 'Recommended' section
 
-const StyledRecommended = styled.section``
+const StyledRecommended = styled.section`
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 
 const StyledRecommendedItems = styled.div`
   @media screen and (min-width: 768px) {
