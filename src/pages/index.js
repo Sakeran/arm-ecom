@@ -6,6 +6,7 @@ import styled from "styled-components"
 import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
 import ProductCardWide from "../components/productCardWide"
+import { InternalLink, PriceTag } from "../components/elements"
 
 // Splash Image / Promotional Message
 
@@ -90,9 +91,77 @@ const Recommended = ({ items }) => (
 
 // "Deal of the Day" section
 
-const StyledDealOfTheDay = styled.section``
+const StyledDealOfTheDay = styled.section`
+  overflow: hidden;
+  position: relative;
+`
 
-const DealOfTheDay = () => <StyledDealOfTheDay />
+const StyledDODImage = styled(Img)`
+  width: 150%;
+  margin-left: -15%;
+`
+
+const StyledDODContent = styled.div`
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 2.5rem;
+    width: max-content;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+  }
+`
+
+const StyledDODInfo = styled.div`
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin: auto 0 4rem 2rem;
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 1rem;
+
+  p {
+    color: #5f4339;
+    margin-top: 0;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-around;
+    @supports (justify-content: space-evenly) {
+      justify-content: space-evenly;
+    }
+  }
+`
+
+const DealOfTheDay = ({ fluid }) => (
+  <StyledDealOfTheDay>
+    <StyledDODImage fluid={fluid} alt="" />
+    <StyledDODContent>
+      <h2>Deal of The Day</h2>
+      <StyledDODInfo>
+        <p>
+          Aenean suscipit, arcu in posuere lacinia, metus massa porttitor dolor,
+          ut nisi eget eros.
+        </p>
+        <div>
+          <PriceTag>$199</PriceTag>
+          <InternalLink to="/">View Product</InternalLink>
+        </div>
+      </StyledDODInfo>
+    </StyledDODContent>
+  </StyledDealOfTheDay>
+)
 
 // Shop Sections
 
@@ -103,7 +172,7 @@ const IndexPage = ({ data }) => (
     <SEO title="Home" />
     <SplashPromo fluid={data.splashBG.childImageSharp.fluid} />
     <Recommended items={data.watches.nodes} />
-    <DealOfTheDay />
+    <DealOfTheDay fluid={data.dealOfDayBG.childImageSharp.fluid} />
     {/* TODO - 'Shop' sections/sliders */}
   </Layout>
 )
@@ -117,6 +186,15 @@ export const query = graphql`
         }
       }
     }
+
+    dealOfDayBG: file(relativePath: { eq: "splashes/phone-on-desk1.jpg" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+
     watches: allProductDataWatches(limit: 2) {
       nodes {
         fields {
