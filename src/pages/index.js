@@ -94,16 +94,23 @@ const Recommended = ({ items }) => (
 const StyledDealOfTheDay = styled.section`
   overflow: hidden;
   position: relative;
+  width: 100%;
 `
 
 const StyledDODImage = styled(Img)`
   width: 150%;
   margin-left: -15%;
+
+  @media screen and (min-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+  }
 `
 
 const StyledDODContent = styled.div`
   position: absolute;
   top: 0;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -129,6 +136,13 @@ const StyledDODInfo = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding: 1rem;
+
+  @media screen and (min-width: 768px) {
+    margin: auto 3rem 20% auto;
+    width: 40%;
+    min-height: 30%;
+    justify-content: space-around;
+  }
 
   p {
     color: #5f4339;
