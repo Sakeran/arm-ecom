@@ -10,6 +10,10 @@ const StyledProductCardWide = styled.div`
   border: 1px solid #5f4339;
   padding: 0.5rem;
   display: flex;
+  @media screen and (min-width: 768px) {
+    width: 45%;
+    margin: 0;
+  }
 `
 
 const StyledImage = styled(ProductImage)`

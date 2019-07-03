@@ -62,12 +62,24 @@ const SplashPromo = ({ fluid }) => (
 
 const StyledRecommended = styled.section``
 
+const StyledRecommendedItems = styled.div`
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-around;
+    @supports (justify-content: space-evenly) {
+      justify-content: space-evenly;
+    }
+  }
+`
+
 const Recommended = ({ items }) => (
   <StyledRecommended>
     <h2>Recommended In Watches</h2>
-    {items.map((item, idx) => (
-      <ProductCardWide key={idx} product={item} />
-    ))}
+    <StyledRecommendedItems>
+      {items.map((item, idx) => (
+        <ProductCardWide key={idx} product={item} />
+      ))}
+    </StyledRecommendedItems>
   </StyledRecommended>
 )
 
