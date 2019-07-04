@@ -66,6 +66,8 @@ const StyledSliderContainer = styled.div`
   overflow-x: scroll;
   display: flex;
   scroll-snap-type: x proximity;
+  position: relative;
+  z-index: 0;
 `
 
 export default class ProductSectionSlider extends React.Component {

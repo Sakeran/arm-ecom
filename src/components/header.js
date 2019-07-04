@@ -26,6 +26,7 @@ const ColorBand = styled.div`
 
 const ToggleButton = styled.button`
   position: absolute;
+  z-index: 1000;
   @supports (position: fixed) {
     position: fixed;
   }
@@ -34,11 +35,11 @@ const ToggleButton = styled.button`
   background: none;
   border: 0;
   transition: fill 0.2s ease-in-out;
-  fill: white;
+  fill: black;
 
   &:hover,
   &:focus {
-    fill: black;
+    fill: #5c6bc0;
   }
 
   svg {
@@ -55,7 +56,7 @@ const Menu = styled.div`
   z-index: 1000;
   box-sizing: border-box;
   background-color: #be9c91;
-  position: absolute;
+  position: fixed;
   box-shadow: 0.25rem 0 0.25rem 0 rgba(0, 0, 0, 0.3);
   top: 0;
   left: 0;
@@ -247,6 +248,12 @@ const MountedNav = props => {
   )
 }
 
+const StyledHeader = styled.header`
+  position: sticky;
+  top: 0;
+  z-index: 10;
+`
+
 class Header extends React.Component {
   state = {
     mounted: false,
@@ -289,7 +296,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header>
+      <StyledHeader>
         <ColorBand>
           <h1>{this.props.siteTitle}</h1>
         </ColorBand>
@@ -311,7 +318,7 @@ class Header extends React.Component {
             </NoscriptMenu>
           </nav>
         </noscript>
-      </header>
+      </StyledHeader>
     )
   }
 }
