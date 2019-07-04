@@ -6,6 +6,7 @@ import styled from "styled-components"
 import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
 import ProductCardWide from "../components/productCardWide"
+import ProductSectionSlider from "../components/productSectionSlider"
 import { InternalLink, PriceTag } from "../components/elements"
 
 // Splash Image / Promotional Message
@@ -187,7 +188,7 @@ const IndexPage = ({ data }) => (
     <SplashPromo fluid={data.splashBG.childImageSharp.fluid} />
     <Recommended items={data.watches.nodes} />
     <DealOfTheDay fluid={data.dealOfDayBG.childImageSharp.fluid} />
-    {/* TODO - 'Shop' sections/sliders */}
+    <ProductSectionSlider title="Phones" products={data.phoneSlider.nodes} />
   </Layout>
 )
 
@@ -210,6 +211,51 @@ export const query = graphql`
     }
 
     watches: allProductDataWatches(limit: 2) {
+      nodes {
+        fields {
+          imageID
+          price
+          productName
+          rating
+          type
+        }
+      }
+    }
+
+    phoneSlider: allProductDataPhones(limit: 10, skip: 2) {
+      nodes {
+        fields {
+          imageID
+          price
+          productName
+          rating
+          type
+        }
+      }
+    }
+    cameraSlider: allProductDataCameras(limit: 10, skip: 2) {
+      nodes {
+        fields {
+          imageID
+          price
+          productName
+          rating
+          type
+        }
+      }
+    }
+    watchSlider: allProductDataWatches(limit: 10, skip: 2) {
+      nodes {
+        fields {
+          imageID
+          price
+          productName
+          rating
+          type
+        }
+      }
+    }
+    laptopSlider: allProductDataLaptops(limit: 10, skip: 2) {
       nodes {
         fields {
           imageID
