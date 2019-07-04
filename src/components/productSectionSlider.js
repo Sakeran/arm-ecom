@@ -74,7 +74,7 @@ export default class ProductSectionSlider extends React.Component {
     return (
       <div>
         <SectionH2>{`Shop ${title}`}</SectionH2>
-        <ViewAllLink to="/">View All Phones</ViewAllLink>
+        <ViewAllLink to="/">View All {title}</ViewAllLink>
         <StyledSliderContainer>
           {products.map((p, i) => (
             <ProductContainer key={i} product={p.fields} />

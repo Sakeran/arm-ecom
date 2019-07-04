@@ -189,6 +189,9 @@ const IndexPage = ({ data }) => (
     <Recommended items={data.watches.nodes} />
     <DealOfTheDay fluid={data.dealOfDayBG.childImageSharp.fluid} />
     <ProductSectionSlider title="Phones" products={data.phoneSlider.nodes} />
+    <ProductSectionSlider title="Laptops" products={data.laptopSlider.nodes} />
+    <ProductSectionSlider title="Watches" products={data.watchSlider.nodes} />
+    <ProductSectionSlider title="Cameras" products={data.cameraSlider.nodes} />
   </Layout>
 )
 
