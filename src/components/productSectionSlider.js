@@ -20,6 +20,7 @@ const StyledProductContainer = styled.div`
   box-sizing: border-box;
   padding: 0.5rem;
   margin: 0 0.5rem;
+  scroll-snap-align: center;
 
   h3 {
     padding-top: 1rem;
@@ -62,9 +63,9 @@ const ViewAllLink = styled(InternalLink)`
 `
 
 const StyledSliderContainer = styled.div`
-  width: 100%;
   overflow-x: scroll;
   display: flex;
+  scroll-snap-type: x proximity;
 `
 
 export default class ProductSectionSlider extends React.Component {
