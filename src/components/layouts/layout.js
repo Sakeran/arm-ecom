@@ -69,6 +69,7 @@ const Main = styled.main`
   margin: 0 auto;
   background-color: white;
   flex: auto;
+  padding-bottom: 2rem;
 `
 
 const SkipLinks = styled.a`
