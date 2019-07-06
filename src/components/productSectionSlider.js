@@ -21,6 +21,7 @@ const StyledProductContainer = styled.div`
   padding: 0.5rem;
   margin: 0 0.5rem;
   scroll-snap-align: center;
+  box-sizing: border-box;
 
   h3 {
     padding-top: 1rem;
@@ -30,6 +31,25 @@ const StyledProductContainer = styled.div`
   div {
     display: flex;
     justify-content: space-around;
+  }
+
+  @media screen and (min-width: 600px) {
+    width: 40%;
+    flex: 0 0 40%;
+    margin-top: 1rem;
+    @supports (display: grid) {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  @media screen and (min-width: 860px) {
+    width: 30%;
+    flex: 0 0 30%;
+    @supports (display: grid) {
+      width: 100%;
+      margin: 0;
+    }
   }
 `
 
@@ -68,6 +88,27 @@ const StyledSliderContainer = styled.div`
   scroll-snap-type: x proximity;
   position: relative;
   z-index: 0;
+
+  @media screen and (min-width: 600px) {
+    scroll-snap-type: unset;
+    overflow-x: visible;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: -10px; /* Counters the flex item "gutter" margin */
+    @supports (display: grid) {
+      width: 95%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 860px) {
+    @supports (display: grid) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 `
 
 export default class ProductSectionSlider extends React.Component {

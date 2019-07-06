@@ -225,7 +225,7 @@ export const query = graphql`
       }
     }
 
-    phoneSlider: allProductDataPhones(limit: 10, skip: 2) {
+    phoneSlider: allProductDataPhones(limit: 9, skip: 2) {
       nodes {
         fields {
           imageID
@@ -236,7 +236,7 @@ export const query = graphql`
         }
       }
     }
-    cameraSlider: allProductDataCameras(limit: 10, skip: 2) {
+    cameraSlider: allProductDataCameras(limit: 9, skip: 2) {
       nodes {
         fields {
           imageID
@@ -247,7 +247,7 @@ export const query = graphql`
         }
       }
     }
-    watchSlider: allProductDataWatches(limit: 10, skip: 2) {
+    watchSlider: allProductDataWatches(limit: 9, skip: 2) {
       nodes {
         fields {
           imageID
@@ -258,7 +258,7 @@ export const query = graphql`
         }
       }
     }
-    laptopSlider: allProductDataLaptops(limit: 10, skip: 2) {
+    laptopSlider: allProductDataLaptops(limit: 9, skip: 2) {
       nodes {
         fields {
           imageID
