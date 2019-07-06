@@ -25,7 +25,8 @@ const StyledProductContainer = styled.div`
 
   h3 {
     padding-top: 1rem;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 1rem 0;
+    text-align: center;
   }
 
   div {
@@ -71,8 +72,20 @@ const ProductContainer = ({ product }) => (
 
 // Main Slider Component
 
+const SliderHeading = styled.div`
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+  }
+`
+
 const SectionH2 = styled.h2`
   margin-bottom: 0.5rem;
+  @media screen and (min-width: 768px) {
+    margin: 0 1rem;
+  }
 `
 
 const ViewAllLink = styled(InternalLink)`
@@ -80,10 +93,15 @@ const ViewAllLink = styled(InternalLink)`
   width: max-content;
   padding: 0.25rem 0;
   margin: 0 auto 1rem auto;
+
+  @media screen and (min-width: 768px) {
+    padding: 0.25rem 0 0 0;
+    margin: 0;
+  }
 `
 
 const StyledSliderContainer = styled.div`
-  overflow-x: scroll;
+  overflow-x: auto;
   display: flex;
   scroll-snap-type: x proximity;
   position: relative;
@@ -105,25 +123,33 @@ const StyledSliderContainer = styled.div`
   }
 
   @media screen and (min-width: 860px) {
+    width: 80%;
     @supports (display: grid) {
       grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 1.5rem;
     }
   }
+`
+
+const StyledSection = styled.div`
+  margin: 4rem auto;
 `
 
 export default class ProductSectionSlider extends React.Component {
   render() {
     const { title, products } = this.props
     return (
-      <div>
-        <SectionH2>{`Shop ${title}`}</SectionH2>
-        <ViewAllLink to="/">View All {title}</ViewAllLink>
+      <StyledSection>
+        <SliderHeading>
+          <SectionH2>{`Shop ${title}`}</SectionH2>
+          <ViewAllLink to="/">View All {title}</ViewAllLink>
+        </SliderHeading>
         <StyledSliderContainer>
           {products.map((p, i) => (
             <ProductContainer key={i} product={p.fields} />
           ))}
         </StyledSliderContainer>
-      </div>
+      </StyledSection>
     )
   }
 }
