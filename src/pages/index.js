@@ -11,11 +11,15 @@ import { InternalLink, PriceTag } from "../components/elements"
 
 // Splash Image / Promotional Message
 
+const SplashImg = styled(Img)`
+  @media screen and (min-width: 768px) {
+    width: 75%;
+  }
+`
+
 const StyledSplashPromo = styled.section`
   position: relative;
   overflow: hidden;
-
-  background-color: lightgray;
 
   h2 {
     position: absolute;
@@ -38,20 +42,23 @@ const StyledSplashPromo = styled.section`
     mark {
       background-color: rgba(255, 255, 255, 0.8);
     }
+  }
 
-    @media screen and (min-width: 768px) {
-      bottom: unset;
+  @media screen and (min-width: 768px) {
+    margin: 1rem;
+    p {
+      max-width: 90%;
+      line-height: 5rem;
       font-size: 3.5rem;
-      line-height: 4.5rem;
-      top: 4rem;
-      right: 4rem;
+      margin: 0;
+      top: 10%;
     }
   }
 `
 
 const SplashPromo = ({ fluid }) => (
   <StyledSplashPromo>
-    <Img fluid={fluid} alt="" />
+    <SplashImg fluid={fluid} alt="" />
     {/* SR-Only Header */}
     <h2>Featured Announcement</h2>
     <p>
