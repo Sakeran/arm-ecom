@@ -206,10 +206,6 @@ const DealOfTheDay = ({ fluid }) => (
   </StyledDealOfTheDay>
 )
 
-// Shop Sections
-
-// TODO
-
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
