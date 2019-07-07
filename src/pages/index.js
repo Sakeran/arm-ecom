@@ -74,14 +74,24 @@ const StyledRecommended = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    min-height: unset;
+    margin: 2rem 0;
+
+    h2 {
+      margin-bottom: 2rem;
+    }
+  }
 `
 
 const StyledRecommendedItems = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
-    justify-content: space-around;
-    @supports (justify-content: space-evenly) {
-      justify-content: space-evenly;
+    margin-left: 1rem;
+    & > * {
+      margin-right: 1rem;
+      flex: auto;
     }
   }
 `
