@@ -103,6 +103,12 @@ const StyledDealOfTheDay = styled.section`
   overflow: hidden;
   position: relative;
   width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
 `
 
 const StyledDODImage = styled(Img)`
@@ -110,8 +116,8 @@ const StyledDODImage = styled(Img)`
   margin-left: -15%;
 
   @media screen and (min-width: 768px) {
-    width: 100%;
     margin-left: 0;
+    flex: 1 0 60%;
   }
 `
 
@@ -132,6 +138,11 @@ const StyledDODContent = styled.div`
     margin: 1rem auto;
     padding: 0.5rem 1rem;
   }
+
+  @media screen and (min-width: 768px) {
+    position: relative;
+    flex: 0 1 40%;
+  }
 `
 
 const StyledDODInfo = styled.div`
@@ -146,9 +157,9 @@ const StyledDODInfo = styled.div`
   padding: 1rem;
 
   @media screen and (min-width: 768px) {
-    margin: auto 3rem 20% auto;
-    width: 40%;
-    min-height: 30%;
+    background: none;
+    width: 100%;
+    margin: 0;
     justify-content: space-around;
   }
 
