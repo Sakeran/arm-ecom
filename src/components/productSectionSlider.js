@@ -6,33 +6,16 @@
 import React from "react"
 import styled from "styled-components"
 
-import ProductImage from "./productImage"
-import { PriceTag, InternalLink } from "./elements"
+import ProductCardVert from "./productCardVert"
+import { InternalLink } from "./elements"
 
 // Single Product Container
 
-const StyledProductContainer = styled.div`
+const ProductContainer = styled(ProductCardVert)`
   width: 60%;
   flex: 0 0 60%;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #5f4339;
-  box-sizing: border-box;
-  padding: 0.5rem;
   margin: 0 0.5rem;
   scroll-snap-align: center;
-  box-sizing: border-box;
-
-  h3 {
-    padding-top: 1rem;
-    margin: 0 0 1rem 0;
-    text-align: center;
-  }
-
-  div {
-    display: flex;
-    justify-content: space-around;
-  }
 
   @media screen and (min-width: 600px) {
     width: 40%;
@@ -53,22 +36,6 @@ const StyledProductContainer = styled.div`
     }
   }
 `
-
-const StyledProductImage = styled(ProductImage)`
-  order: -1;
-  border: 1px solid black;
-`
-
-const ProductContainer = ({ product }) => (
-  <StyledProductContainer>
-    <h3>{product.productName}</h3>
-    <StyledProductImage type={product.type} imageId={product.imageID} />
-    <div>
-      <PriceTag>${product.price}</PriceTag>
-      <InternalLink to="/">View Product</InternalLink>
-    </div>
-  </StyledProductContainer>
-)
 
 // Main Slider Component
 
