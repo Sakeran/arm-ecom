@@ -135,21 +135,16 @@ const StyledSection = styled.div`
   margin: 4rem auto;
 `
 
-export default class ProductSectionSlider extends React.Component {
-  render() {
-    const { title, products } = this.props
-    return (
-      <StyledSection>
-        <SliderHeading>
-          <SectionH2>{`Shop ${title}`}</SectionH2>
-          <ViewAllLink to="/">View All {title}</ViewAllLink>
-        </SliderHeading>
-        <StyledSliderContainer>
-          {products.map((p, i) => (
-            <ProductContainer key={i} product={p.fields} />
-          ))}
-        </StyledSliderContainer>
-      </StyledSection>
-    )
-  }
-}
+export default ({ title, products }) => (
+  <StyledSection>
+    <SliderHeading>
+      <SectionH2>{`Shop ${title}`}</SectionH2>
+      <ViewAllLink to="/">View All {title}</ViewAllLink>
+    </SliderHeading>
+    <StyledSliderContainer>
+      {products.map((p, i) => (
+        <ProductContainer key={i} product={p.fields} />
+      ))}
+    </StyledSliderContainer>
+  </StyledSection>
+)
