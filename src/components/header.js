@@ -176,16 +176,16 @@ const MenuLinks = ({ loggedIn, logoutDispatch }) => (
     <h4>Shop By Category</h4>
     <ul>
       <li>
-        <Link to="/">Phones</Link>
+        <Link to="/phones">Phones</Link>
       </li>
       <li>
-        <Link to="/">Watches</Link>
+        <Link to="/watches">Watches</Link>
       </li>
       <li>
-        <Link to="/">Laptops</Link>
+        <Link to="/laptops">Laptops</Link>
       </li>
       <li>
-        <Link to="/">Cameras</Link>
+        <Link to="/cameras">Cameras</Link>
       </li>
     </ul>
   </>
