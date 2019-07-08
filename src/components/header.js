@@ -261,18 +261,26 @@ class Header extends React.Component {
     menuSlideOut: true,
   }
 
-  componentDidMount() {
-    const checkWidth = () => {
-      const width = document.body.clientWidth
-      if (width >= 768) {
-        this.setState({ menuSlideOut: false })
-      } else {
-        this.setState({ menuSlideOut: true })
-      }
+  // Checks whether the component should be in slide-out
+  // form or not. This should only be referred to in
+  // componentDidMount or componentWillUnmount
+  checkWidth = () => {
+    const width = document.body.clientWidth
+    if (width >= 768) {
+      this.setState({ menuSlideOut: false })
+    } else {
+      this.setState({ menuSlideOut: true })
     }
-    window.addEventListener("resize", () => checkWidth())
-    checkWidth()
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.checkWidth)
+    this.checkWidth()
     this.setState({ mounted: true })
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.checkWidth)
   }
 
   // Toggle the menu off if a click happens somewhere else
