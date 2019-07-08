@@ -58,11 +58,25 @@ const SortingWidget = ({ sort, changeSort }) => (
     <legend>Sort Products</legend>
     <OptionsContainer onChange={e => changeSort(e.target.value)}>
       <SelectionContainer>
-        <input type="radio" id="sort-by-name" name="sort-type" value="name" />
+        <input
+          type="radio"
+          id="sort-by-name"
+          name="sort-type"
+          value="name"
+          checked={sort === "name"}
+          readOnly
+        />
         <label htmlFor="sort-by-name">Name</label>
       </SelectionContainer>
       <SelectionContainer>
-        <input type="radio" id="sort-by-price" name="sort-type" value="price" />
+        <input
+          type="radio"
+          id="sort-by-price"
+          name="sort-type"
+          value="price"
+          checked={sort === "price"}
+          readOnly
+        />
         <label htmlFor="sort-by-price">Price</label>
       </SelectionContainer>
       <SelectionContainer>
@@ -71,6 +85,8 @@ const SortingWidget = ({ sort, changeSort }) => (
           id="sort-by-rating"
           name="sort-type"
           value="rating"
+          checked={sort === "rating"}
+          readOnly
         />
         <label htmlFor="sort-by-rating">Rating</label>
       </SelectionContainer>
