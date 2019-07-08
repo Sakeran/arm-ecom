@@ -281,6 +281,7 @@ class Header extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.checkWidth)
+    document.removeEventListener("click", this.backdropListener)
   }
 
   // Toggle the menu off if a click happens somewhere else
