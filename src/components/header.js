@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { connect } from "react-redux"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 import { logout } from "../state/actions"
 
@@ -52,6 +52,19 @@ const ToggleButton = styled.button`
   }
 `
 
+const MenuAnimation = keyframes`
+  0% {
+    visibility: visible;
+  }
+
+  99% {
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
+  }
+`
+
 const Menu = styled.div`
   z-index: 1000;
   box-sizing: border-box;
@@ -71,6 +84,7 @@ const Menu = styled.div`
   &[aria-expanded="false"] {
     left: -300px;
     box-shadow: 0.25rem 0 0.25rem 0 rgba(0, 0, 0, 0);
+    animation: ${MenuAnimation} 0.2s linear forwards;
   }
 
   ul {
