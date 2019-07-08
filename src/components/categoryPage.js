@@ -11,7 +11,7 @@ import { changeSort } from "../state/actions"
 const StyledSortingWidget = styled.fieldset`
   border-width: 1px;
   border-color: #5f4339;
-  margin-bottom: 1rem;
+  margin: 0 1rem 1rem;
 `
 
 // This container is necessary of this implementation, due
@@ -109,17 +109,25 @@ const doSort = (products, sort) => {
   return chosenSort(products)
 }
 
+const StylyedProductGrid = styled.div`
+  margin: 0 1rem;
+
+  & > div {
+    margin-bottom: 1rem;
+  }
+`
+
 const CategoryPage = ({ title, products, sort, changeSort }) => (
   <>
     <h2>{title}</h2>
     <SortingWidget sort={sort} changeSort={changeSort} />
 
     {/* Sort the products by the preferred option, if possible */}
-    <div>
+    <StylyedProductGrid>
       {doSort(products, sort).map((p, i) => (
         <ProductCardVert key={i} product={p.fields} />
       ))}
-    </div>
+    </StylyedProductGrid>
   </>
 )
 
