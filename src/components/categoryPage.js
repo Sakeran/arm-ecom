@@ -12,6 +12,7 @@ const StyledSortingWidget = styled.fieldset`
   border-width: 1px;
   border-color: #5f4339;
   margin: 0 1rem 1rem;
+  max-width: 600px;
 `
 
 // This container is necessary of this implementation, due
@@ -114,6 +115,37 @@ const StylyedProductGrid = styled.div`
 
   & > div {
     margin-bottom: 1rem;
+  }
+
+  @media screen and (min-width: 450px) {
+    display: flex;
+    flex-flow: row wrap;
+    margin-right: 0;
+
+    & > div {
+      flex: 0 1 calc(50% - 1rem);
+      margin-right: 1rem;
+    }
+
+    @supports (display: grid) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+      margin-right: 1rem;
+
+      & > div {
+        margin: 0;
+      }
+    }
+  }
+  @media screen and (min-width: 700px) {
+    & > div {
+      flex: 0 1 calc(33% - 1rem);
+    }
+
+    @supports (display: grid) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 `
 
