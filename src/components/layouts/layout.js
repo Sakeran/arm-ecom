@@ -86,6 +86,7 @@ const SkipLinks = styled.a`
   z-index: 1;
   top: -4rem;
   transition: top 0.3s ease-in;
+  z-index: 2000;
 
   &:focus {
     top: 0;
