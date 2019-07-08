@@ -1,7 +1,10 @@
 import React from "react"
+import { connect } from "react-redux"
 import styled from "styled-components"
 
 import ProductCardVert from "./productCardVert"
+
+import { changeSort } from "../state/actions"
 
 // Sorting Widget
 
@@ -50,10 +53,10 @@ const SelectionContainer = styled.div`
   }
 `
 
-const SortingWidget = () => (
+const SortingWidget = ({ sort, changeSort }) => (
   <StyledSortingWidget>
     <legend>Sort Products</legend>
-    <OptionsContainer>
+    <OptionsContainer onChange={e => changeSort(e.target.value)}>
       <SelectionContainer>
         <input type="radio" id="sort-by-name" name="sort-type" value="name" />
         <label htmlFor="sort-by-name">Name</label>
@@ -77,31 +80,90 @@ const SortingWidget = () => (
 
 // Category Page
 
-const CategoryPage = ({ title, products }) => (
+const sortingOptions = {
+  name: sortByName,
+  price: sortByPrice,
+  rating: sortByRating,
+}
+
+const doSort = (products, sort) => {
+  if (!sort) return products
+  const chosenSort = sortingOptions[sort]
+  if (!chosenSort) return products
+  return chosenSort(products)
+}
+
+const CategoryPage = ({ title, products, sort, changeSort }) => (
   <>
     <h2>{title}</h2>
-    <SortingWidget />
+    <SortingWidget sort={sort} changeSort={changeSort} />
+
+    {/* Sort the products by the preferred option, if possible */}
     <div>
-      {products.map(p => (
-        <ProductCardVert product={p.fields} />
+      {doSort(products, sort).map((p, i) => (
+        <ProductCardVert key={i} product={p.fields} />
       ))}
     </div>
   </>
 )
 
-export default CategoryPage
+const mapStateToProps = state => ({
+  sort: state.preferredSort,
+})
+
+const mapDispatchToProps = dispatch => ({
+  changeSort: sort => dispatch(changeSort(sort)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoryPage)
 
 // Available sorting functions:
 // STUB
 
 function sortByPrice(products) {
-  return products
+  // Sorting by name first makes the sort order consistent.
+  // Could probably stand to use a cleaner method,
+  // but this will work for the sample.
+  return sortByName(products).sort((a, b) => {
+    const {
+      fields: { price: priceA },
+    } = a
+    const {
+      fields: { price: priceB },
+    } = b
+
+    return priceA < priceB ? -1 : 1
+  })
 }
 
-function soryByName(products) {
-  return products
+function sortByName(products) {
+  return products.sort((a, b) => {
+    const {
+      fields: { productName: productNameA },
+    } = a
+    const {
+      fields: { productName: productNameB },
+    } = b
+
+    return productNameA < productNameB ? -1 : 1
+  })
 }
 
 function sortByRating(products) {
-  return products
+  // Sorting by name first makes the sort order consistent.
+  // Could probably stand to use a cleaner method,
+  // but this will work for the sample.
+  return sortByName(products).sort((a, b) => {
+    const {
+      fields: { rating: ratingA },
+    } = a
+    const {
+      fields: { rating: ratingB },
+    } = b
+
+    return ratingA > ratingB ? -1 : 1
+  })
 }
