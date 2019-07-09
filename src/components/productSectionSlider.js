@@ -106,11 +106,11 @@ export default ({ title, products }) => (
   <StyledSection>
     <SliderHeading>
       <SectionH2>{`Shop ${title}`}</SectionH2>
-      <ViewAllLink to="/">View All {title}</ViewAllLink>
+      <ViewAllLink to={`/${title.toLowerCase()}`}>View All {title}</ViewAllLink>
     </SliderHeading>
     <StyledSliderContainer>
       {products.map((p, i) => (
-        <ProductContainer key={i} product={p.fields} />
+        <ProductContainer key={p.fields.slug} product={p.fields} />
       ))}
     </StyledSliderContainer>
   </StyledSection>
