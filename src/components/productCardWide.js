@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import ProductImage from "./productImage"
+import StarRating from "./starRating"
 import { PriceTag, InternalLink } from "./elements"
 
 const StyledProductCardWide = styled.div`
@@ -22,6 +23,11 @@ const StyledImage = styled(ProductImage)`
   border: 1px solid black;
 `
 
+const StyledStarRating = styled(StarRating)`
+  width: 50%;
+  margin-top: 0.5rem;
+`
+
 const TextContent = styled.div`
   flex: auto;
   margin-left: 1rem;
@@ -35,7 +41,7 @@ const TextContent = styled.div`
 `
 
 const CardInfo = styled.div`
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   display: flex;
   align-items: center;
   a {
@@ -52,6 +58,7 @@ export default ({ product: { fields } }) => (
     />
     <TextContent>
       <h3>{fields.productName}</h3>
+      <StyledStarRating rating={fields.rating} />
       <CardInfo>
         <PriceTag>{`$${fields.price}`}</PriceTag>
         <InternalLink
