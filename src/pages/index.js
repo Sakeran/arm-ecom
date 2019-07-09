@@ -245,6 +245,7 @@ export const query = graphql`
           productName
           rating
           type
+          slug
         }
       }
     }
@@ -257,6 +258,7 @@ export const query = graphql`
           productName
           rating
           type
+          slug
         }
       }
     }
@@ -268,6 +270,7 @@ export const query = graphql`
           productName
           rating
           type
+          slug
         }
       }
     }
@@ -279,6 +282,7 @@ export const query = graphql`
           productName
           rating
           type
+          slug
         }
       }
     }
@@ -290,6 +294,7 @@ export const query = graphql`
           productName
           rating
           type
+          slug
         }
       }
     }

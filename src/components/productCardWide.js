@@ -62,7 +62,7 @@ export default ({ product: { fields } }) => (
       <CardInfo>
         <PriceTag>{`$${fields.price}`}</PriceTag>
         <InternalLink
-          to="/"
+          to={`/${fields.slug || ""}`}
           aria-label={`View product information for ${fields.productName}`}
         >
           View Product

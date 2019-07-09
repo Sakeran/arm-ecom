@@ -44,7 +44,7 @@ const ProductCardVert = ({ product, className }) => (
     <StyledStarRating rating={product.rating} />
     <div>
       <PriceTag>${product.price}</PriceTag>
-      <InternalLink to="/">View Product</InternalLink>
+      <InternalLink to={`/${product.slug || ""}`}>View Product</InternalLink>
     </div>
   </StyledProductCardVert>
 )

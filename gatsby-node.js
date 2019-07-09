@@ -52,6 +52,21 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       name: "productName",
       value: name,
     })
+
+    // Product Slug
+    // ( Product name + random number [1..10] )
+    const slug =
+      name
+        .split(" ")
+        .map(p => p.toLowerCase())
+        .join("-") +
+      "-" +
+      (1 + Math.floor(Math.random() * 10)).toString()
+    actions.createNodeField({
+      node,
+      name: "slug",
+      value: slug,
+    })
   }
 }
 

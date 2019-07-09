@@ -1,4 +1,5 @@
 import React from "react"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
@@ -21,6 +22,7 @@ export const query = graphql`
           productName
           rating
           type
+          slug
         }
       }
     }
