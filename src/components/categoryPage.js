@@ -157,7 +157,7 @@ const CategoryPage = ({ title, products, sort, changeSort }) => (
     {/* Sort the products by the preferred option, if possible */}
     <StylyedProductGrid>
       {doSort(products, sort).map((p, i) => (
-        <ProductCardVert key={i} product={p.fields} />
+        <ProductCardVert key={p.fields.slug || i} product={p.fields} />
       ))}
     </StylyedProductGrid>
   </>

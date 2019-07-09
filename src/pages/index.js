@@ -101,7 +101,7 @@ const Recommended = ({ items }) => (
     <h2>Recommended In Watches</h2>
     <StyledRecommendedItems>
       {items.map((item, idx) => (
-        <ProductCardWide key={idx} product={item} />
+        <ProductCardWide key={item.fields.slug} product={item} />
       ))}
     </StyledRecommendedItems>
   </StyledRecommended>
