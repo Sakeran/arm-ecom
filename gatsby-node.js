@@ -28,6 +28,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       value: productType,
     })
 
+    // Company Name
+    actions.createNodeField({
+      node,
+      name: 'companyName',
+      value: node.company.companyName
+    })
+
     // Product Price
     actions.createNodeField({
       node,
