@@ -52,8 +52,19 @@ const StyledStarRating = styled.div`
   }
 `
 
+const SRSpan = styled.span`
+  position: absolute;
+  display: block;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+`
+
 const StarRating = ({ rating, className }) => (
   <StyledStarRating className={className}>
+    <SRSpan>{`${rating / 2} out of 5 stars`}</SRSpan>
     {getStarArray(rating)}
   </StyledStarRating>
 )
