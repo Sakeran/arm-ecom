@@ -237,63 +237,82 @@ export const query = graphql`
       }
     }
 
-    watches: allProductDataWatches(limit: 2) {
+    watches: allProducts(
+      limit: 2
+      filter: { fields: { type: { eq: "watch" } } }
+    ) {
       nodes {
         fields {
-          imageID
-          price
-          productName
-          rating
           type
+          rating
+          productName
+          price
+          imageID
           slug
         }
       }
     }
 
-    phoneSlider: allProductDataPhones(limit: 9, skip: 2) {
+    phoneSlider: allProducts(
+      limit: 6
+      filter: { fields: { type: { eq: "phone" } } }
+      skip: 2
+    ) {
       nodes {
         fields {
-          imageID
-          price
-          productName
-          rating
           type
+          rating
+          productName
+          price
+          imageID
           slug
         }
       }
     }
-    cameraSlider: allProductDataCameras(limit: 9, skip: 2) {
+    cameraSlider: allProducts(
+      limit: 6
+      filter: { fields: { type: { eq: "camera" } } }
+      skip: 2
+    ) {
       nodes {
         fields {
-          imageID
-          price
-          productName
-          rating
           type
+          rating
+          productName
+          price
+          imageID
           slug
         }
       }
     }
-    watchSlider: allProductDataWatches(limit: 9, skip: 2) {
+    watchSlider: allProducts(
+      limit: 6
+      filter: { fields: { type: { eq: "watch" } } }
+      skip: 2
+    ) {
       nodes {
         fields {
-          imageID
-          price
-          productName
-          rating
           type
+          rating
+          productName
+          price
+          imageID
           slug
         }
       }
     }
-    laptopSlider: allProductDataLaptops(limit: 9, skip: 2) {
+    laptopSlider: allProducts(
+      limit: 6
+      filter: { fields: { type: { eq: "laptop" } } }
+      skip: 2
+    ) {
       nodes {
         fields {
-          imageID
-          price
-          productName
-          rating
           type
+          rating
+          productName
+          price
+          imageID
           slug
         }
       }

@@ -14,14 +14,14 @@ const PhonesPage = ({ data }) => (
 
 export const query = graphql`
   query {
-    phones: allProductDataPhones {
+    phones: allProducts(filter: { fields: { type: { eq: "phone" } } }) {
       nodes {
         fields {
-          imageID
-          price
-          productName
-          rating
           type
+          rating
+          productName
+          price
+          imageID
           slug
         }
       }

@@ -14,14 +14,14 @@ const WatchesPage = ({ data }) => (
 
 export const query = graphql`
   query {
-    watches: allProductDataWatches {
+    watches: allProducts(filter: { fields: { type: { eq: "watch" } } }) {
       nodes {
         fields {
-          imageID
-          price
-          productName
-          rating
           type
+          rating
+          productName
+          price
+          imageID
           slug
         }
       }
