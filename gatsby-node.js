@@ -3,6 +3,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
+const path = require("path")
 
 // We expect 80 different 'products' in our faker data, and
 // want to assign product types equally. Use this to track
@@ -31,8 +32,8 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     // Company Name
     actions.createNodeField({
       node,
-      name: 'companyName',
-      value: node.company.companyName
+      name: "companyName",
+      value: node.company.companyName,
     })
 
     // Product Price
@@ -116,4 +117,30 @@ function getProductPrice(type) {
     default:
       return 1
   }
+}
+
+// Product Pages
+
+exports.createPages = ({ graphql, actions }) => {
+  return graphql(`
+    query {
+      allProducts {
+        nodes {
+          fields {
+            slug
+            type
+          }
+        }
+      }
+    }
+  `).then(result => {
+    const products = result.data.allProducts.nodes
+    products.forEach(({ fields: { slug, type } }) => {
+      actions.createPage({
+        path: slug,
+        component: path.resolve("./src/templates/product.js"),
+        context: { slug, type },
+      })
+    })
+  })
 }
