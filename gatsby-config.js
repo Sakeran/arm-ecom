@@ -33,6 +33,17 @@ module.exports = {
     // `gatsby-plugin-offline`,
 
     // Fake Item Data
+    {
+      resolve: `gatsby-source-faker`,
+      options: {
+        schema: {
+          company: ["companyName"],
+          commerce: ["productName"],
+        },
+        count: 80,
+        type: "Products",
+      },
+    },
     // Phones
     {
       resolve: `gatsby-source-faker`,
