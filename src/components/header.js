@@ -139,7 +139,7 @@ const Menu = styled.div`
       margin-left: 1rem;
       li {
         margin-right: 1rem;
-        flex: 1;
+        flex: 1 1 auto;
         a,
         button {
           width: auto;
@@ -168,7 +168,7 @@ const NoscriptMenu = styled(Menu)`
   box-shadow: none;
 `
 
-const MenuLinks = ({ loggedIn, logoutDispatch }) => (
+const MenuLinks = ({ cart, loggedIn, logoutDispatch }) => (
   <>
     <ul>
       <li>
@@ -183,7 +183,7 @@ const MenuLinks = ({ loggedIn, logoutDispatch }) => (
       </li>
       {loggedIn && (
         <li>
-          <Link to="/cart">Cart</Link>
+          <Link to="/cart">Cart{(cart && cart.length) ? ` (${cart.length})` : ""}</Link>
         </li>
       )}
     </ul>
@@ -254,6 +254,7 @@ const MountedNav = props => {
       </ToggleButton>
       <Menu id="nav-menu" {...ariaProps}>
         <MenuLinks
+          cart={props.cart}
           loggedIn={props.loggedIn}
           logoutDispatch={props.logoutDispatch}
         />
@@ -326,6 +327,7 @@ class Header extends React.Component {
         {/* Show the main nav only after mount. */}
         {this.state.mounted && (
           <MountedNav
+            cart={this.props.cart}
             onToggle={this.toggleState}
             {...this.state}
             loggedIn={this.props.loggedIn}
@@ -348,6 +350,7 @@ class Header extends React.Component {
 
 const mapStateToProps = state => ({
   loggedIn: state.loggedIn,
+  cart: state.cart,
 })
 
 const mapDispatchToProps = dispatch => ({
