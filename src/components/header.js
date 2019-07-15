@@ -183,7 +183,7 @@ const MenuLinks = ({ loggedIn, logoutDispatch }) => (
       </li>
       {loggedIn && (
         <li>
-          <Link to="/">Cart</Link>
+          <Link to="/cart">Cart</Link>
         </li>
       )}
     </ul>

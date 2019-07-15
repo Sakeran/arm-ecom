@@ -1,5 +1,12 @@
 import { createStore as reduxCreateStore } from "redux"
-import { LOGIN, LOGOUT, CHANGE_SORT } from "./actions"
+import {
+  LOGIN,
+  LOGOUT,
+  CHANGE_SORT,
+  ADD_ITEM,
+  REMOVE_ITEM,
+  CLEAR_CART,
+} from "./actions"
 
 const resolver = (state, action) => {
   switch (action.type) {
@@ -14,12 +21,17 @@ const resolver = (state, action) => {
       return {
         loggedIn: false,
         username: null,
-        cart: null,
+        cart: [],
       }
     case CHANGE_SORT:
       return {
         ...state,
         preferredSort: action.preferredSort,
+      }
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
       }
     default:
       return state
@@ -30,7 +42,7 @@ const initialState = {
   loggedIn: false,
   username: null,
   preferredSort: "name",
-  cart: null,
+  cart: [],
 }
 
 const createStore = () => reduxCreateStore(resolver, initialState)
