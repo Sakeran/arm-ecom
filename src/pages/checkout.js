@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import styled from "styled-components"
 
 import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
@@ -24,19 +25,45 @@ const EmptyCart = () => (
   </>
 )
 
+const StyledOrderList = styled.div`
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 4rem 0.5rem 1rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid #5f4339;
+
+    li {
+      display: flex;
+      & > span {
+        margin-left: auto;
+      }
+    }
+  }
+
+  & > div {
+    font-size: 1.1rem;
+    text-align: right;
+    margin-right: 4rem;
+  }
+`
+
 const Checkout = ({ cart, clear }) => (
   <>
     <h2>Confirm Purchase</h2>
-    <ul>
-      {cart.map(item => (
-        <li key={item.slug}>
-          {item.productName} <PriceTag>${item.price}</PriceTag>
-        </li>
-      ))}
-    </ul>
-    <div>
-      Total: <PriceTag>${cart.reduce((acc, el) => acc + el.price, 0)}</PriceTag>
-    </div>
+    <StyledOrderList>
+      <ul>
+        {cart.map(item => (
+          <li key={item.slug}>
+            {item.productName} <PriceTag>${item.price}</PriceTag>
+          </li>
+        ))}
+      </ul>
+      <div>
+        Total:{" "}
+        <PriceTag>${cart.reduce((acc, el) => acc + el.price, 0)}</PriceTag>
+      </div>
+    </StyledOrderList>
     <h2>Shipping Details</h2>
     <button>Place Order</button>
   </>
