@@ -22,6 +22,12 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
   }
 
+  p {
+    @media screen and (min-width: 768px) {
+      margin-left: 1rem;
+    }
+  }
+
   /* Headings */
 
   h2, h3, h4, h5, h6 {

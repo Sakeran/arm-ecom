@@ -66,6 +66,7 @@ const MainProductContent = styled.div`
 
       & > p {
         margin-bottom: auto;
+        margin-left: 0;
       }
 
       & > button {
