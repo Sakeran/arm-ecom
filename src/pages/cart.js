@@ -1,35 +1,120 @@
 import React from "react"
+import { Link } from "gatsby"
 import { connect } from "react-redux"
 import styled from "styled-components"
 
 import Layout from "../components/layouts/layout"
 import SEO from "../components/seo"
-import { InternalLink } from "../components/elements"
+import ProductImage from "../components/productImage"
+import { InternalLink, PriceTag, PrimaryButton } from "../components/elements"
 
 import { removeItem } from "../state/actions"
 
 const NotLoggedInPage = () => (
   <>
     <h2>You are not currently logged in.</h2>
-    <InternalLink to="/login">Go to login page.</InternalLink>
-    <br />
-    <br />
-    <InternalLink to="/">Return to main page.</InternalLink>
+    <div style={{ marginLeft: "1rem" }}>
+      <InternalLink to="/login">Go to login page.</InternalLink>
+      <br />
+      <br />
+      <InternalLink to="/">Return to main page.</InternalLink>
+    </div>
   </>
 )
 
-const LoggedInCart = ({ username, cart }) => (
-  <pre>{JSON.stringify(cart, null, 2)}</pre>
+const EmptyCartPage = () => (
+  <>
+    <h2>Your Cart</h2>
+    <p>Your shopping cart is currently empty.</p>
+  </>
 )
 
-const CartPage = ({ username, cart }) => (
+const StyledCartItem = styled.div`
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #5f4339;
+  padding: 0.25rem;
+  /* margin: 0.25rem; */
+
+  & > *:first-child {
+    width: 35%;
+  }
+
+  & > *:nth-child(2) {
+    margin-left: 1rem;
+
+    span {
+      font-size: 1.1rem;
+      position: absolute;
+      bottom: 0.25rem;
+      right: 1rem;
+    }
+  }
+`
+
+const CartItem = ({ item }) => (
+  <StyledCartItem>
+    <ProductImage type={item.type} imageId={item.imageID} />
+    <div>
+      {item.productName}
+      <PriceTag>${item.price}</PriceTag>
+    </div>
+  </StyledCartItem>
+)
+
+const StyledTotal = styled.div`
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  font-size: 1.2rem;
+`
+
+const StyledCheckoutButton = styled(PrimaryButton)`
+  width: 75%;
+  margin: 1rem auto;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+`
+
+const LoggedInCart = ({ username, cart }) => {
+  if (!cart.length) {
+    return <EmptyCartPage />
+  }
+  return (
+    <>
+      <h2>Your Cart</h2>
+      <div>
+        {cart.map(item => (
+          <CartItem key={item.slug} item={item} />
+        ))}
+        <StyledTotal>
+          Total:{"  "}
+          <PriceTag>${cart.reduce((acc, el) => acc + el.price, 0)}</PriceTag>
+        </StyledTotal>
+        <StyledCheckoutButton as={Link} to="/checkout">
+          Checkout
+        </StyledCheckoutButton>
+      </div>
+    </>
+  )
+}
+
+const CartPage = ({ loggedIn, username, cart, removeItem }) => (
   <Layout>
     <SEO title="Cart" />
-    {username ? <LoggedInCart username={username} cart={cart} /> : <NotLoggedInPage />}
+    {loggedIn ? (
+      <LoggedInCart username={username} cart={cart} />
+    ) : (
+      <NotLoggedInPage />
+    )}
   </Layout>
 )
 
 const mapStateToProps = state => ({
+  loggedIn: state.loggedIn,
   username: state.username,
   cart: state.cart,
 })

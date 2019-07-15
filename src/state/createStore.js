@@ -19,6 +19,7 @@ const resolver = (state, action) => {
     }
     case LOGOUT:
       return {
+        ...state,
         loggedIn: false,
         username: null,
         cart: [],
