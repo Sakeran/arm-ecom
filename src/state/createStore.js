@@ -32,7 +32,12 @@ const resolver = (state, action) => {
     case ADD_ITEM:
       return {
         ...state,
-        cart: [...state.cart, action.item]
+        cart: [...state.cart, action.item],
+      }
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        cart: state.cart.filter(e => e.slug !== action.itemKey)
       }
     case CLEAR_CART:
       return {

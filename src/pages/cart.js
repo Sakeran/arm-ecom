@@ -33,10 +33,10 @@ const StyledCartItem = styled.div`
   position: relative;
   box-sizing: border-box;
   display: flex;
+  font-size: 1.2rem;
   align-items: center;
   border-bottom: 1px solid #5f4339;
   padding: 0.25rem;
-  /* margin: 0.25rem; */
 
   & > *:first-child {
     width: 35%;
@@ -44,6 +44,17 @@ const StyledCartItem = styled.div`
 
   & > *:nth-child(2) {
     margin-left: 1rem;
+
+    button {
+      background: none;
+      border: none;
+      color: #5f4339;
+      margin: 0;
+      padding: 0;
+      margin-top: 0.25rem;
+      font-size: 1rem;
+      text-decoration: underline;
+    }
 
     span {
       font-size: 1.1rem;
@@ -54,11 +65,13 @@ const StyledCartItem = styled.div`
   }
 `
 
-const CartItem = ({ item }) => (
+const CartItem = ({ item, removeItem }) => (
   <StyledCartItem>
     <ProductImage type={item.type} imageId={item.imageID} />
     <div>
       {item.productName}
+      <br />
+      <button onClick={() => removeItem(item.slug)}>Remove From Cart</button>
       <PriceTag>${item.price}</PriceTag>
     </div>
   </StyledCartItem>
@@ -79,7 +92,7 @@ const StyledCheckoutButton = styled(PrimaryButton)`
   color: black;
 `
 
-const LoggedInCart = ({ username, cart }) => {
+const LoggedInCart = ({ username, cart, removeItem }) => {
   if (!cart.length) {
     return <EmptyCartPage />
   }
@@ -88,7 +101,7 @@ const LoggedInCart = ({ username, cart }) => {
       <h2>Your Cart</h2>
       <div>
         {cart.map(item => (
-          <CartItem key={item.slug} item={item} />
+          <CartItem key={item.slug} item={item} removeItem={removeItem} />
         ))}
         <StyledTotal>
           Total:{"  "}
@@ -106,7 +119,7 @@ const CartPage = ({ loggedIn, username, cart, removeItem }) => (
   <Layout>
     <SEO title="Cart" />
     {loggedIn ? (
-      <LoggedInCart username={username} cart={cart} />
+      <LoggedInCart username={username} cart={cart} removeItem={removeItem} />
     ) : (
       <NotLoggedInPage />
     )}
