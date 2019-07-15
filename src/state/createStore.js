@@ -28,6 +28,11 @@ const resolver = (state, action) => {
         ...state,
         preferredSort: action.preferredSort,
       }
+    case ADD_ITEM:
+      return {
+        ...state,
+        cart: [...state.cart, action.item]
+      }
     case CLEAR_CART:
       return {
         ...state,

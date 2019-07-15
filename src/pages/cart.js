@@ -7,7 +7,6 @@ import SEO from "../components/seo"
 import { InternalLink } from "../components/elements"
 
 import { removeItem } from "../state/actions"
-import { UAParser } from "ua-parser-js"
 
 const NotLoggedInPage = () => (
   <>

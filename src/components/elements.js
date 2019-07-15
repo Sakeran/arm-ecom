@@ -32,3 +32,19 @@ export const PrimaryButton = styled.button`
     color: white;
   }
 `
+
+export const SuccessButton = styled.button`
+  background: #21de5e;
+  box-shadow: none;
+  border: none;
+  padding: 0.5rem;
+  display: block;
+`
+
+export const DisabledButton = styled.button`
+  background: lightgray;
+  box-shadow: none;
+  border: none;
+  padding: 0.5rem;
+  display: block;
+`

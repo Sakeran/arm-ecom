@@ -1,4 +1,5 @@
 import React from "react"
+import { connect } from "react-redux"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 
@@ -6,7 +7,9 @@ import Layout from "../components/layouts/layout"
 import ProductImage from "../components/productImage"
 import StarRating from "../components/starRating"
 import ProductCardVert from "../components/productCardVert"
-import { PrimaryButton } from "../components/elements"
+import { PrimaryButton, DisabledButton, SuccessButton } from "../components/elements"
+
+import { addItem } from "../state/actions"
 
 const MainProductContainer = styled.div`
   margin: 0 1rem 5rem 1rem;
@@ -64,6 +67,11 @@ const MainProductContent = styled.div`
       & > p {
         margin-bottom: auto;
       }
+
+      & > button {
+        display: block;
+        width: 70%;
+      }
     }
   }
 `
@@ -72,11 +80,6 @@ const RatingDiv = styled.div`
   display: flex;
   align-items: center;
   margin: 1rem 0;
-`
-
-const AddButton = styled(PrimaryButton)`
-  display: block;
-  width: 70%;
 `
 
 const RecommendedContainer = styled.div`
@@ -107,7 +110,32 @@ const RecommendedContainer = styled.div`
   }
 `
 
-const ProductPage = ({ data: { product, recommended } }) => (
+const ActionButton = ({ item, username, cart, addToCart }) => {
+  if (username) {
+    // If the item is in the cart, display succeess button.
+    if (cart.find(e => e.slug === item.fields.slug)) {
+      return (
+        <SuccessButton>
+          Item Added To Cart
+        </SuccessButton>
+      )
+    }
+    return (
+      <PrimaryButton onClick={() => addToCart(item.fields)}>
+        Add To Cart
+      </PrimaryButton>
+    )
+  }
+
+  return <DisabledButton disabled>Login to use cart</DisabledButton>
+}
+
+const ProductPage = ({
+  data: { product, recommended },
+  username,
+  cart,
+  addToCart,
+}) => (
   <Layout>
     <MainProductContainer>
       <MainProductHeader>
@@ -131,7 +159,12 @@ const ProductPage = ({ data: { product, recommended } }) => (
           <span>Average Rating:</span>
           <StarRating rating={product.fields.rating} />
         </RatingDiv>
-        <AddButton>Add To Cart</AddButton>
+        <ActionButton
+          item={product}
+          username={username}
+          cart={cart}
+          addToCart={addToCart}
+        />
       </MainProductContent>
     </MainProductContainer>
     <h2>More Like {product.fields.productName}:</h2>
@@ -143,7 +176,19 @@ const ProductPage = ({ data: { product, recommended } }) => (
   </Layout>
 )
 
-export default ProductPage
+const mapStateToProps = state => ({
+  username: state.username,
+  cart: state.cart,
+})
+
+const mapDispatchToProps = dispatch => ({
+  addToCart: item => dispatch(addItem(item)),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductPage)
 
 export const query = graphql`
   query($slug: String!, $type: String!) {
