@@ -17,3 +17,18 @@ export const InternalLink = styled(Link)`
   color: black;
   border-bottom: 1px solid black;
 `
+
+// Buttons
+
+export const PrimaryButton = styled.button`
+  background: #5c6bc0;
+  box-shadow: none;
+  border: none;
+  padding: 0.5rem;
+  display: block;
+  transition: color 0.2s ease-in-out;
+  &:hover,
+  &:focus {
+    color: white;
+  }
+`
