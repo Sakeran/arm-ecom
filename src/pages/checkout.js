@@ -1,4 +1,5 @@
 import React from "react"
+import { navigate } from "gatsby"
 import { connect } from "react-redux"
 import styled from "styled-components"
 
@@ -102,6 +103,12 @@ const FormHalfWidth = styled.div`
   }
 `
 
+const placeOrderHandler = clearCart => e => {
+  e.preventDefault()
+  clearCart();
+  navigate("/confirmation", { state: { checkout: true } })
+}
+
 const Checkout = ({ cart, clear }) => (
   <>
     <h2>Confirm Purchase</h2>
@@ -134,7 +141,11 @@ const Checkout = ({ cart, clear }) => (
       </FormHalfWidth>
       <label htmlFor="deliveryinstructions">Delivery Instructions</label>
       <textarea name="" />
-      <input type="submit" value="Place Order" />
+      <input
+        type="submit"
+        value="Place Order"
+        onClick={placeOrderHandler(clear)}
+      />
     </StyledShippingForm>
   </>
 )
