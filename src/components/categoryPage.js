@@ -11,7 +11,7 @@ import { changeSort } from "../state/actions"
 const StyledSortingWidget = styled.fieldset`
   border-width: 1px;
   border-color: #5f4339;
-  margin: 0 1rem 1rem;
+  margin: 0 0.5rem 1rem;
   max-width: 600px;
 `
 
@@ -72,13 +72,24 @@ const SortingWidget = ({ sort, changeSort }) => (
       <SelectionContainer>
         <input
           type="radio"
-          id="sort-by-price"
+          id="sort-by-price-hi"
           name="sort-type"
-          value="price"
-          checked={sort === "price"}
+          value="priceHigh"
+          checked={sort === "priceHigh"}
           readOnly
         />
-        <label htmlFor="sort-by-price">Price</label>
+        <label htmlFor="sort-by-price-hi">Price (High)</label>
+      </SelectionContainer>
+      <SelectionContainer>
+        <input
+          type="radio"
+          id="sort-by-price-low"
+          name="sort-type"
+          value="priceLow"
+          checked={sort === "priceLow"}
+          readOnly
+        />
+        <label htmlFor="sort-by-price-low">Price (Low)</label>
       </SelectionContainer>
       <SelectionContainer>
         <input
@@ -99,7 +110,8 @@ const SortingWidget = ({ sort, changeSort }) => (
 
 const sortingOptions = {
   name: sortByName,
-  price: sortByPrice,
+  priceHigh: sortByPrice(),
+  priceLow: sortByPrice(true),
   rating: sortByRating,
 }
 
@@ -177,22 +189,25 @@ export default connect(
 )(CategoryPage)
 
 // Available sorting functions:
-// STUB
 
-function sortByPrice(products) {
-  // Sorting by name first makes the sort order consistent.
-  // Could probably stand to use a cleaner method,
-  // but this will work for the sample.
-  return sortByName(products).sort((a, b) => {
-    const {
-      fields: { price: priceA },
-    } = a
-    const {
-      fields: { price: priceB },
-    } = b
-
-    return priceA < priceB ? -1 : 1
-  })
+function sortByPrice(lowFirst = false) {
+  return (products) => {
+    // Sorting by name first makes the sort order consistent.
+    // Could probably stand to use a cleaner method,
+    // but this will work for the sample.
+    const sorted = sortByName(products).sort((a, b) => {
+      const {
+        fields: { price: priceA },
+      } = a
+      const {
+        fields: { price: priceB },
+      } = b
+  
+      return priceA < priceB ? -1 : 1
+    })
+  
+    return lowFirst ? sorted : sorted.reverse()
+  }
 }
 
 function sortByName(products) {
