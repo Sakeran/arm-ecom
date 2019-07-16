@@ -39,17 +39,31 @@ const StyledOrderList = styled.div`
         margin-left: auto;
       }
     }
+
+    max-width: 400px;
+    @media screen and (min-width: 400px) {
+      margin: 0 1rem 0.5rem 0;
+    }
   }
 
   & > div {
     font-size: 1.1rem;
     text-align: right;
     margin-right: 2rem;
+
+    max-width: 400px;
+    @media screen and (min-width: 400px) {
+      margin-right: 0;
+    }
+  }
+  @media screen and (min-width: 400px) {
+    margin-left: 1rem;
   }
 `
 
 const StyledShippingForm = styled.form`
   margin: 0 1rem;
+  max-width: 600px;
   display: flex;
   flex-wrap: wrap;
 
@@ -79,7 +93,6 @@ const FormHalfWidth = styled.div`
   width: calc(50% - 1rem);
   box-sizing: border-box;
   input {
-
     width: 100%;
     box-sizing: border-box;
   }
