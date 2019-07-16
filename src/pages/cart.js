@@ -37,9 +37,11 @@ const StyledCartItem = styled.div`
   align-items: center;
   border-bottom: 1px solid #5f4339;
   padding: 0.25rem;
+  max-width: 600px;
 
   & > *:first-child {
     width: 35%;
+    max-width: 150px;
   }
 
   & > *:nth-child(2) {
@@ -63,6 +65,10 @@ const StyledCartItem = styled.div`
       right: 1rem;
     }
   }
+
+  @media screen and (min-width: 675px) {
+    margin-left: 1rem;
+  }
 `
 
 const CartItem = ({ item, removeItem }) => (
@@ -78,10 +84,16 @@ const CartItem = ({ item, removeItem }) => (
 )
 
 const StyledTotal = styled.div`
+  box-sizing: border-box;
   margin-top: 0.5rem;
-  margin-right: 1rem;
+  padding-right: 1rem;
   text-align: right;
+  max-width: 600px;
   font-size: 1.2rem;
+
+  @media screen and (min-width: 675px) {
+    padding-right: 0;
+  }
 `
 
 const StyledCheckoutButton = styled(PrimaryButton)`
@@ -90,6 +102,11 @@ const StyledCheckoutButton = styled(PrimaryButton)`
   text-decoration: none;
   text-align: center;
   color: black;
+
+  @media screen and (min-width: 675px) {
+    margin: 1rem 0 1rem 1rem;
+    max-width: 500px;
+  }
 `
 
 const LoggedInCart = ({ username, cart, removeItem }) => {
