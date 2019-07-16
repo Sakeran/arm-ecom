@@ -84,6 +84,8 @@ const RatingDiv = styled.div`
 `
 
 const RecommendedContainer = styled.div`
+  margin: 0 1rem;
+  
   & > div {
     margin: 0 auto 1rem auto;
     max-width: 450px;
