@@ -15,7 +15,12 @@ export const InternalLink = styled(Link)`
   display: inline-block;
   text-decoration: none;
   color: black;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid currentColor;
+
+  &:hover,
+  &:focus {
+    color: #5c6bc0;
+  }
 `
 
 // Buttons
