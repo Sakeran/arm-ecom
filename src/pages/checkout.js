@@ -29,7 +29,7 @@ const StyledOrderList = styled.div`
   ul {
     list-style: none;
     padding: 0;
-    margin: 0 4rem 0.5rem 1rem;
+    margin: 0 2rem 0.5rem 2rem;
     padding-bottom: 0.25rem;
     border-bottom: 1px solid #5f4339;
 
@@ -44,7 +44,48 @@ const StyledOrderList = styled.div`
   & > div {
     font-size: 1.1rem;
     text-align: right;
-    margin-right: 4rem;
+    margin-right: 2rem;
+  }
+`
+
+const StyledShippingForm = styled.form`
+  margin: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  label[for="name"],
+  label[for="address"],
+  label[for="deliveryinstructions"] {
+    width: 100%;
+  }
+
+  input[name="name"],
+  input[name="address"] {
+    width: 100%;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 1rem;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+  }
+`
+
+const FormHalfWidth = styled.div`
+  width: calc(50% - 1rem);
+  box-sizing: border-box;
+  input {
+
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  &:nth-of-type(2) {
+    margin-left: auto;
   }
 `
 
@@ -65,7 +106,23 @@ const Checkout = ({ cart, clear }) => (
       </div>
     </StyledOrderList>
     <h2>Shipping Details</h2>
-    <button>Place Order</button>
+    <StyledShippingForm>
+      <label htmlFor="name">Name</label>
+      <input name="name" type="text" />
+      <label htmlFor="address">Address</label>
+      <input name="address" type="text" />
+      <FormHalfWidth>
+        <label htmlFor="city">City</label>
+        <input name="city" type="text" />
+      </FormHalfWidth>
+      <FormHalfWidth>
+        <label htmlFor="state">State</label>
+        <input name="state" type="text" />
+      </FormHalfWidth>
+      <label htmlFor="deliveryinstructions">Delivery Instructions</label>
+      <textarea name="" />
+      <input type="submit" value="Place Order" />
+    </StyledShippingForm>
   </>
 )
 
