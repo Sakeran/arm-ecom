@@ -105,7 +105,7 @@ const FormHalfWidth = styled.div`
 
 const placeOrderHandler = clearCart => e => {
   e.preventDefault()
-  clearCart();
+  clearCart()
   navigate("/confirmation", { state: { checkout: true } })
 }
 
@@ -141,6 +141,10 @@ const Checkout = ({ cart, clear }) => (
       </FormHalfWidth>
       <label htmlFor="deliveryinstructions">Delivery Instructions</label>
       <textarea name="" />
+      <p style={{ fontWeight: "bold" }}>
+        Note: This is an example website - none of the above fields are
+        required, and no actual order will be placed.
+      </p>
       <input
         type="submit"
         value="Place Order"
