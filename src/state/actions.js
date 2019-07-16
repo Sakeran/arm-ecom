@@ -28,3 +28,7 @@ export const removeItem = itemKey => ({
   type: REMOVE_ITEM,
   itemKey
 })
+
+export const clearCart = () => ({
+  type: CLEAR_CART
+})
